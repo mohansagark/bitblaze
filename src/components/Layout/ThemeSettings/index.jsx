@@ -8,6 +8,7 @@ import { BsCheck } from "react-icons/bs";
 import { Tooltip } from "@mui/material";
 import { COLORS } from "../../../helpers/config";
 import { useTheme } from "../../../themes";
+import Switch from "../../common/Switch";
 
 const ThemeSettings = () => {
   const {
@@ -19,7 +20,7 @@ const ThemeSettings = () => {
     changeColor,
   } = useTheme();
 
-  const toggleDrawer = (open) => (event) => {
+  const toggleDrawer = (open) => (event, reason) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -30,11 +31,7 @@ const ThemeSettings = () => {
   };
 
   const ThemeBlock = () => (
-    <Box
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
+    <Box role="presentation" className="h-full ">
       <div className="flex justify-between items-center p-4 ml-4">
         <p className="font-semibold text-lg">Settings</p>
         <button
@@ -47,39 +44,14 @@ const ThemeSettings = () => {
         </button>
       </div>
       <div className="flex-col border-t-1 border-color p-4 ml-4">
-        <p className="font-semibold text-xl ">Theme Option</p>
-
-        <div className="mt-4">
-          <input
-            type="radio"
-            id="light"
-            name="theme"
-            value="light"
-            className="cursor-pointer"
-            onChange={(e) => changeMode(e.target.value)}
-            checked={mode === "light"}
-          />
-          <label htmlFor="light" className="ml-2 text-md cursor-pointer">
-            Light
-          </label>
-        </div>
-        <div className="mt-2">
-          <input
-            type="radio"
-            id="dark"
-            name="theme"
-            value="dark"
-            onChange={(e) => changeMode(e.target.value)}
-            className="cursor-pointer"
-            checked={mode === "dark"}
-          />
-          <label htmlFor="dark" className="ml-2 text-md cursor-pointer">
-            Dark
-          </label>
-        </div>
+        <p className="font-semibold text-xl">Theme Option</p>
+        <Switch
+          checked={mode === "dark"}
+          setChecked={(e) => changeMode(e ? "dark" : "light")}
+        />
       </div>
       <div className="p-4 border-t-1 border-color ml-4">
-        <p className="font-semibold text-xl ">Theme Colors</p>
+        <p className="font-semibold text-xl">Theme Colors</p>
         <div className="flex gap-3">
           {Object.entries(COLORS).map((item, index) => (
             <Tooltip key={index} title={item[0]} placement="top">
@@ -109,13 +81,13 @@ const ThemeSettings = () => {
 
   return (
     <>
-      <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
+      <div className="fixed right-6 bottom-4" style={{ zIndex: "1000" }}>
         <Tooltip title="Settings" placement="top">
           <Button
             type="button"
             onClick={toggleDrawer(true)}
-            style={{ borderRadius: "50%", aspectRatio: 1 }}
-            className="bg-primary text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
+            style={{ borderRadius: "50%", aspectRatio: 1, minWidth: 48 }}
+            className="bg-primary text-2xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
           >
             <FiSettings color="white" size={24} />
           </Button>

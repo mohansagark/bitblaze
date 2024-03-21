@@ -9,7 +9,12 @@ const Layout = ({ children = <></> }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Header />
-      <Grid container spacing={2} style={{ marginTop: 0 }}>
+      <Grid
+        className="bg-background"
+        container
+        spacing={2}
+        style={{ marginTop: 0 }}
+      >
         <Grid item xs={3}>
           <SideDrawer />
         </Grid>
