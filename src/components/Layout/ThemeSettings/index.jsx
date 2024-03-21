@@ -29,7 +29,7 @@ const ThemeSettings = () => {
     setThemeSettings(open);
   };
 
-  const list = () => (
+  const ThemeBlock = () => (
     <Box
       role="presentation"
       onClick={toggleDrawer(false)}
@@ -54,10 +54,10 @@ const ThemeSettings = () => {
             type="radio"
             id="light"
             name="theme"
-            value="Light"
+            value="light"
             className="cursor-pointer"
-            onChange={changeMode}
-            checked={mode === "Light"}
+            onChange={(e) => changeMode(e.target.value)}
+            checked={mode === "light"}
           />
           <label htmlFor="light" className="ml-2 text-md cursor-pointer">
             Light
@@ -68,10 +68,10 @@ const ThemeSettings = () => {
             type="radio"
             id="dark"
             name="theme"
-            value="Dark"
-            onChange={changeMode}
+            value="dark"
+            onChange={(e) => changeMode(e.target.value)}
             className="cursor-pointer"
-            checked={mode === "Dark"}
+            checked={mode === "dark"}
           />
           <label htmlFor="dark" className="ml-2 text-md cursor-pointer">
             Dark
@@ -84,17 +84,17 @@ const ThemeSettings = () => {
           {Object.entries(COLORS).map((item, index) => (
             <Tooltip key={index} title={item[0]} placement="top">
               <div
-                className="relative mt-2 cursor-pointer flex gap-5 items-center"
+                className="relative mt-2 cursor-pointer  gap-5 items-center"
                 key={item[0]}
               >
                 <button
                   type="button"
-                  className="h-10 w-10 rounded-full cursor-pointer"
+                  className="h-10 w-10 rounded-full cursor-pointer flex justify-center items-center"
                   style={{ backgroundColor: item[1] }}
                   onClick={() => changeColor(item[1])}
                 >
                   <BsCheck
-                    className={`ml-2 text-2xl text-white ${
+                    className={`text-2xl text-white flex ${
                       item[1] === color ? "block" : "hidden"
                     }`}
                   />
@@ -114,10 +114,10 @@ const ThemeSettings = () => {
           <Button
             type="button"
             onClick={toggleDrawer(true)}
-            style={{ background: color, borderRadius: "50%" }}
+            style={{ background: color, borderRadius: "50%", aspectRatio: 1 }}
             className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
           >
-            <FiSettings />
+            <FiSettings color="white" size={24} />
           </Button>
         </Tooltip>
       </div>
@@ -126,7 +126,7 @@ const ThemeSettings = () => {
         open={themeSettings}
         onClose={toggleDrawer(false)}
       >
-        {list()}
+        <ThemeBlock />
       </Drawer>
     </>
   );

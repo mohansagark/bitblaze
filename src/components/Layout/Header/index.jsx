@@ -39,10 +39,20 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: color }}>
+    <AppBar
+      position="static"
+      className="bg-primary"
+      sx={{ backgroundColor: "#fff" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <AdbIcon
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              color: color,
+            }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -54,7 +64,7 @@ function Header() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: color,
               textDecoration: "none",
             }}
           >
@@ -131,7 +141,11 @@ function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt="Mohansagar"
+                  sx={{ backgroundColor: color }}
+                  src="/static/images/avatar/2.jpg"
+                />
               </IconButton>
             </Tooltip>
             <Menu

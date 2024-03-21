@@ -2,12 +2,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer
-      style={{ height: 100, backgroundColor: "#1976d2", color: "#ffffff" }}
-    >
-      <p>Author: Hege Refsnes</p>
+    <footer className="bg-primary h-[100px] text-typography">
+      <p>Author: Mohansagar K.</p>
       <p>
-        <a href="mailto:hege@example.com">hege@example.com</a>
+        <a href="mailto:contact@mohansagar.website">
+          contact@mohansagar.website
+        </a>
       </p>
     </footer>
   );

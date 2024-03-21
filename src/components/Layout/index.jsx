@@ -4,10 +4,12 @@ import Grid from "@mui/material/Grid";
 import Header from "./Header";
 import SideDrawer from "./Sidebar";
 import Footer from "./Footer";
+import { useTheme } from "../../themes";
 
 const Layout = ({ children = <></> }) => {
+  const { mode } = useTheme();
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} className={`${mode === "Dark" ? "dark" : ""}`}>
       <Header />
       <Grid container spacing={2} style={{ marginTop: 0 }}>
         <Grid item xs={3}>

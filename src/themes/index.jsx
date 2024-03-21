@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { persistData } from "../helpers/general";
+import { changeTheme, persistData } from "../helpers/general";
 import { DEFAULT_COLOR, DEFAULT_MODE } from "./defaultTheme";
 
 const ThemeContext = createContext();
@@ -15,6 +15,7 @@ export const ThemeProvider = ({ children }) => {
 
   const changeMode = (newMode) => {
     setMode(newMode);
+    changeTheme(newMode);
     persistData("themeMode", newMode);
   };
 
