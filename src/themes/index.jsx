@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
-import { changeTheme, persistData } from "../helpers/general";
+import {
+  changePrimaryColor,
+  changeTheme,
+  persistData,
+} from "../helpers/general";
 import { DEFAULT_COLOR, DEFAULT_MODE } from "./defaultTheme";
 
 const ThemeContext = createContext();
@@ -21,6 +25,7 @@ export const ThemeProvider = ({ children }) => {
 
   const changeColor = (newColor) => {
     setColor(newColor);
+    changePrimaryColor(newColor);
     persistData("colorMode", newColor);
   };
   return (

@@ -91,11 +91,11 @@ const ThemeSettings = () => {
                   type="button"
                   className="h-10 w-10 rounded-full cursor-pointer flex justify-center items-center"
                   style={{ backgroundColor: item[1] }}
-                  onClick={() => changeColor(item[1])}
+                  onClick={() => changeColor(item[0])}
                 >
                   <BsCheck
                     className={`text-2xl text-white flex ${
-                      item[1] === color ? "block" : "hidden"
+                      item[0] === color ? "block" : "hidden"
                     }`}
                   />
                 </button>
@@ -114,8 +114,8 @@ const ThemeSettings = () => {
           <Button
             type="button"
             onClick={toggleDrawer(true)}
-            style={{ background: color, borderRadius: "50%", aspectRatio: 1 }}
-            className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
+            style={{ borderRadius: "50%", aspectRatio: 1 }}
+            className="bg-primary text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
           >
             <FiSettings color="white" size={24} />
           </Button>

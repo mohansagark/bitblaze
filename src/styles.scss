@@ -21,14 +21,21 @@
     --color-accent-1: #6366f1; /* indigo-500 */
     --color-accent-2: #8b5cf6; /* purple-500 */
   }
-  @import "themes/light-theme.scss";
-  @import "themes/dark-theme.scss";
+  @import "themes/modes/light-theme.scss";
+  @import "themes/modes/dark-theme.scss";
 
-  @import "themes/coral-light-theme.scss";
-  @import "themes/coral-dark-theme.scss";
+  @import "themes/modes/coral-light-theme.scss";
+  @import "themes/modes/coral-dark-theme.scss";
 
-  @import "themes/vivid-light-theme.scss";
-  @import "themes/vivid-dark-theme.scss";
+  @import "themes/modes/vivid-light-theme.scss";
+  @import "themes/modes/vivid-dark-theme.scss";
+
+  @import "themes/colors/green.scss";
+  @import "themes/colors/blue.scss";
+  @import "themes/colors/purple.scss";
+  @import "themes/colors/red.scss";
+  @import "themes/colors/orange.scss";
+  @import "themes/colors/indigo.scss";
 }
 
 html {

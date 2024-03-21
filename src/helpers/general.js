@@ -11,3 +11,7 @@ export const persistData = (key, value) => {
 export const changeTheme = (theme) => {
   document.querySelector("html")?.setAttribute("data-theme", theme);
 };
+
+export const changePrimaryColor = (color) => {
+  document.querySelector("html")?.setAttribute("primary-color", color);
+};

@@ -39,18 +39,14 @@ function Header() {
   };
 
   return (
-    <AppBar
-      position="static"
-      className="bg-primary"
-      sx={{ backgroundColor: "#fff" }}
-    >
+    <AppBar position="static" className="bg-background">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon
+            className="text-primary"
             sx={{
               display: { xs: "none", md: "flex" },
               mr: 1,
-              color: color,
             }}
           />
           <Typography
@@ -58,6 +54,7 @@ function Header() {
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
+            className="text-primary"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -143,7 +140,7 @@ function Header() {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt="Mohansagar"
-                  sx={{ backgroundColor: color }}
+                  className="bg-primary"
                   src="/static/images/avatar/2.jpg"
                 />
               </IconButton>
