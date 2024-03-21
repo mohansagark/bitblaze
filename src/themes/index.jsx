@@ -1,0 +1,45 @@
+import React, { createContext, useContext, useState } from "react";
+import { persistData } from "../helpers/general";
+import { DEFAULT_COLOR, DEFAULT_MODE } from "./defaultTheme";
+
+const ThemeContext = createContext();
+
+export const useTheme = () => useContext(ThemeContext);
+
+export const ThemeProvider = ({ children }) => {
+  const [screenSize, setScreenSize] = useState(undefined);
+  const [activeMenu, setActiveMenu] = useState(true);
+  const [themeSettings, setThemeSettings] = useState(false);
+  const [color, setColor] = useState(DEFAULT_COLOR);
+  const [mode, setMode] = useState(DEFAULT_MODE);
+
+  const changeMode = (newMode) => {
+    setMode(newMode);
+    persistData("themeMode", newMode);
+  };
+
+  const changeColor = (newColor) => {
+    setColor(newColor);
+    persistData("colorMode", newColor);
+  };
+  return (
+    <ThemeContext.Provider
+      value={{
+        color,
+        mode,
+        activeMenu,
+        screenSize,
+        themeSettings,
+        setScreenSize,
+        setActiveMenu,
+        changeMode,
+        changeColor,
+        setThemeSettings,
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useStateContext = () => useContext(ThemeContext);
