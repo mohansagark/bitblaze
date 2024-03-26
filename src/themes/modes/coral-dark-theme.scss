@@ -1,18 +1,22 @@
 html[data-theme="coral-dark"] {
-  --color-primary: #ff7e67; /* coral */
-  --color-secondary: #ffcd56; /* yellow */
-  --color-text: #f9f9f9; /* light gray */
-  --color-background: #333333; /* dark gray */
-  --color-success: #4caf50; /* green */
-  --color-warning: #ff9800; /* orange */
-  --color-error: #f44336; /* red */
-  --color-neutral-100: #424242; /* gray */
-  --color-neutral-200: #303030; /* gray */
-  --color-neutral-300: #212121; /* gray */
-  --color-neutral-400: #121212; /* gray */
-  --color-neutral-500: #000000; /* black */
-  --color-neutral-600: #000000; /* black */
-  --color-neutral-700: #000000; /* black */
+  --color-primary: #ff6f61; /* Coral */
+  --color-primary-text: #f9f9f9; /* Light text for primary */
+  --color-secondary: #10b981; /* green-500 */
+  --color-secondary-text: #f9f9f9; /* Light text for secondary */
+  --color-background: #000000; /* Dark gray */
+  --color-background-text: #f9f9f9; /* Light text for dark background */
+  --color-surface: #1e1e1e; /* Dark gray */
+  --color-surface-text: #f9f9f9; /* Light text for dark surface */
+  --color-success: #34d399; /* green-400 */
+  --color-warning: #fbbf24; /* yellow-400 */
+  --color-error: #ef4444; /* red-400 */
+  --color-neutral-100: #f3f4f6; /* gray-100 */
+  --color-neutral-200: #e5e7eb; /* gray-200 */
+  --color-neutral-300: #d1d5db; /* gray-300 */
+  --color-neutral-400: #9ca3af; /* gray-400 */
+  --color-neutral-500: #6b7280; /* gray-500 */
+  --color-neutral-600: #4b5563; /* gray-600 */
+  --color-neutral-700: #374151; /* gray-700 */
   --color-accent-1: #6366f1; /* indigo-500 */
   --color-accent-2: #8b5cf6; /* purple-500 */
 }

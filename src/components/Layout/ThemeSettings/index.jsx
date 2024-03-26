@@ -31,27 +31,27 @@ const ThemeSettings = () => {
   };
 
   const ThemeBlock = () => (
-    <Box role="presentation" className="h-full ">
+    <Box role="presentation" className="h-full bg-surface">
       <div className="flex justify-between items-center p-4 ml-4">
-        <p className="font-semibold text-lg">Settings</p>
+        <p className="font-semibold text-lg text-surface-text">Settings</p>
         <button
           type="button"
           onClick={() => setThemeSettings(false)}
           style={{ color: "rgb(153, 171, 180)", borderRadius: "50%" }}
-          className="text-2xl p-3 hover:drop-shadow-xl hover:bg-light-gray"
+          className="text-2xl p-3 hover:drop-shadow-xl hover:bg-neutral700 bg-background text-surface-text"
         >
           <MdOutlineCancel />
         </button>
       </div>
       <div className="flex-col border-t-1 border-color p-4 ml-4">
-        <p className="font-semibold text-xl">Theme Option</p>
+        <p className="font-semibold text-xl text-surface-text">Theme Option</p>
         <Switch
           checked={mode === "dark"}
           setChecked={(e) => changeMode(e ? "dark" : "light")}
         />
       </div>
       <div className="p-4 border-t-1 border-color ml-4">
-        <p className="font-semibold text-xl">Theme Colors</p>
+        <p className="font-semibold text-xl text-surface-text">Theme Colors</p>
         <div className="flex gap-3">
           {Object.entries(COLORS).map((item, index) => (
             <Tooltip key={index} title={item[0]} placement="top">

@@ -5,9 +5,13 @@
 @layer base {
   html {
     --color-primary: #3b82f6; /* blue-500 */
+    --color-primary-text: #ffffff; /* White text for primary */
     --color-secondary: #10b981; /* green-500 */
-    --color-text: #111827; /* gray-900 */
+    --color-secondary-text: #ffffff; /* White text for secondary */
     --color-background: #ffffff; /* white */
+    --color-background-text: #111827; /* Dark gray text for white background */
+    --color-surface: #f5f5f5; /* Light gray */
+    --color-surface-text: #111827; /* Dark gray text for light gray surface */
     --color-success: #34d399; /* green-400 */
     --color-warning: #fbbf24; /* yellow-400 */
     --color-error: #ef4444; /* red-400 */

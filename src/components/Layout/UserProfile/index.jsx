@@ -7,13 +7,13 @@ import Button from "../../common/Button";
 
 const UserProfile = ({ closeUserProfile }) => {
   return (
-    <div className="nav-item right-1 top-16 bg-background opacity-95 p-8 rounded-lg w-96">
+    <div className="nav-item right-1 top-16 bg-surface opacity-95 p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg text-text">User Profile</p>
+        <p className="font-semibold text-lg text-surface-text">User Profile</p>
         <MdClose
           onClick={closeUserProfile}
           size={24}
-          className="text-primary cursor-pointer"
+          className="text-surface-text cursor-pointer"
         />
       </div>
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
@@ -23,7 +23,7 @@ const UserProfile = ({ closeUserProfile }) => {
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl text-text">
+          <p className="font-semibold text-xl text-surface-text">
             Mohan Sagar Killamsetty
           </p>
           <p className="text-sm text-neutral-400">Administrator</p>
@@ -47,7 +47,7 @@ const UserProfile = ({ closeUserProfile }) => {
             </button>
 
             <div>
-              <p className="font-semibold text-text">{item.title}</p>
+              <p className="font-semibold text-surface-text">{item.title}</p>
               <p className="text-neutral-400 text-sm">{item.desc}</p>
             </div>
           </div>
@@ -55,11 +55,10 @@ const UserProfile = ({ closeUserProfile }) => {
       </div>
       <div className="mt-5">
         <Button
-          color="white"
+          className="text-primary-text"
           bgColor="bg-primary"
           text="Logout"
           borderRadius="10px"
-          width="full"
         />
       </div>
     </div>

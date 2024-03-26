@@ -11,13 +11,28 @@ module.exports = {
         14: "14px",
       },
       colors: {
+        // Primary colors
         primary: "var(--color-primary) !important",
+        "primary-text": "var(--color-primary-text) !important",
+
+        // Secondary colors
         secondary: "var(--color-secondary) !important",
-        text: "var(--color-text) !important",
+        "secondary-text": "var(--color-secondary-text) !important",
+
+        // Background colors
         background: "var(--color-background) !important",
+        "background-text": "var(--color-background-text) !important",
+
+        // Surface colors
+        surface: "var(--color-surface) !important",
+        "surface-text": "var(--color-surface-text) !important",
+
+        // Success, Warning, Error colors
         success: "var(--color-success) !important",
         warning: "var(--color-warning) !important",
         error: "var(--color-error) !important",
+
+        // Neutral colors
         neutral100: "var(--color-neutral-100) !important",
         neutral200: "var(--color-neutral-200) !important",
         neutral300: "var(--color-neutral-300) !important",
@@ -25,6 +40,8 @@ module.exports = {
         neutral500: "var(--color-neutral-500) !important",
         neutral600: "var(--color-neutral-600) !important",
         neutral700: "var(--color-neutral-700) !important",
+
+        // Accent colors
         accent1: "var(--color-accent-1) !important",
         accent2: "var(--color-accent-2) !important",
       },

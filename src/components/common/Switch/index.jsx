@@ -58,13 +58,13 @@ const Switch = ({ checked, setChecked }) => {
   return (
     <FormGroup>
       <Stack direction="row" spacing={1} alignItems="center">
-        <Typography>Light</Typography>
+        <Typography className="text-surface-text">Light</Typography>
         <FormControlLabel
           control={<MaterialUISwitch sx={{ m: 1 }} />}
           checked={checked}
           onChange={handleChange}
         />
-        <Typography>Dark</Typography>
+        <Typography className="text-surface-text">Dark</Typography>
       </Stack>
     </FormGroup>
   );
