@@ -1,10 +1,10 @@
 import Typography from "@mui/material/Typography";
-import AdbIcon from "@mui/icons-material/Adb";
+import { FaCode } from "react-icons/fa6";
 
 const Logo = () => {
   return (
     <>
-      <AdbIcon className="text-primary flex" />
+      <FaCode size={36} className="text-primary flex mr-2" />
       <Typography
         variant="h6"
         noWrap
@@ -19,7 +19,7 @@ const Logo = () => {
           textDecoration: "none",
         }}
       >
-        LOGO
+        CODECRAFT
       </Typography>
     </>
   );
