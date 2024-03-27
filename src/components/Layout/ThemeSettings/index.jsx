@@ -7,8 +7,8 @@ import { MdOutlineCancel } from "react-icons/md";
 import { BsCheck } from "react-icons/bs";
 import { Tooltip } from "@mui/material";
 import { COLORS } from "../../../helpers/config";
-import { useTheme } from "../../../themes";
 import Switch from "../../common/Switch";
+import { useTheme } from "../../../helpers/hooks";
 
 const ThemeSettings = () => {
   const {
@@ -89,7 +89,7 @@ const ThemeSettings = () => {
             style={{ borderRadius: "50%", aspectRatio: 1, minWidth: 48 }}
             className="bg-primary text-2xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
           >
-            <FiSettings color="white" size={24} />
+            <FiSettings className="text-primary-text" size={24} />
           </Button>
         </Tooltip>
       </div>

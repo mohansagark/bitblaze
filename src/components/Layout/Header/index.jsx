@@ -3,15 +3,15 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
-import AdbIcon from "@mui/icons-material/Adb";
 import UserProfile from "../UserProfile";
 import { Popover } from "@mui/material";
+import Logo from "../Logo";
+import CustomMenu from "../Menu";
 
-function Header() {
+function Header({ showLogo = false }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -31,23 +31,8 @@ function Header() {
       <Container maxWidth="xl">
         <Toolbar disableGutters className="flex justify-between">
           <Box className="flex justify-center items-center gap-2">
-            <AdbIcon className="text-primary flex" />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              className="text-primary"
-              sx={{
-                mr: 2,
-                display: "flex",
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                textDecoration: "none",
-              }}
-            >
-              LOGO
-            </Typography>
+            {showLogo && <Logo />}
+            <CustomMenu />
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="My Profile">

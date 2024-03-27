@@ -6,9 +6,20 @@ import ErrorPage from "../pages/Error";
 import { useStateContext } from "../themes";
 import routes from "./routes";
 import { fetchStore } from "../helpers/general";
+import { useDispatch } from "react-redux";
+import { setMobile } from "../redux/slices/generalSlice";
+import { useMediaQuery } from "@mui/material";
+import { mobileViewBreakPoint } from "../helpers/config";
 
 const LayoutComponent = () => {
   const { changeColor, changeMode } = useStateContext();
+  const dispatch = useDispatch();
+  const isMobile = useMediaQuery(mobileViewBreakPoint);
+
+  useEffect(() => {
+    dispatch(setMobile(isMobile));
+  }, [dispatch, isMobile]);
+
   useEffect(() => {
     const currentThemeColor = fetchStore("colorMode");
     const currentThemeMode = fetchStore("themeMode");

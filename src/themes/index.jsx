@@ -6,9 +6,7 @@ import {
 } from "../helpers/general";
 import { DEFAULT_COLOR, DEFAULT_MODE } from "./defaultTheme";
 
-const ThemeContext = createContext();
-
-export const useTheme = () => useContext(ThemeContext);
+export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [screenSize, setScreenSize] = useState(undefined);

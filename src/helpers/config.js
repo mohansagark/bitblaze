@@ -1,6 +1,12 @@
 import { FiCreditCard } from "react-icons/fi";
 import { BsCurrencyDollar, BsShield } from "react-icons/bs";
 
+export const sidebarWidth = "300px";
+
+export const mobileSidebarWidth = "80vw";
+
+export const mobileViewBreakPoint = "(max-width:600px)";
+
 export const THEMES = {
   DARK: "dark",
   LIGHT: "light",

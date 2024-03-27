@@ -1,29 +1,34 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import { Grid } from "@mui/material";
 import Header from "./Header";
-import SideDrawer from "./Sidebar";
 import Footer from "./Footer";
+import SideDrawer from "./Sidebar";
+import { useMenu } from "../../helpers/hooks";
 
 const Layout = ({ children = <></> }) => {
+  const { sidebarWidth } = useMenu();
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Header />
+    <Grid container sx={{ flexGrow: 1 }}>
       <Grid
-        className="bg-background"
-        container
-        spacing={2}
-        style={{ marginTop: 0 }}
+        className="transition bg-surface"
+        sx={{ width: sidebarWidth, transition: "width 400ms ease" }}
+        item
       >
-        <Grid item xs={3}>
-          <SideDrawer />
-        </Grid>
-        <Grid item xs={9} style={{ minHeight: "calc(100vh - 164px)" }}>
+        <SideDrawer />
+      </Grid>
+      <Grid className="transition" item sx={{ flex: 1 }}>
+        <Header />
+        <Grid
+          className="bg-background"
+          container
+          style={{ marginTop: 0, minHeight: "calc(100vh - 164px)" }}
+        >
           {children}
         </Grid>
+        <Footer />
       </Grid>
-      <Footer />
-    </Box>
+    </Grid>
   );
 };
 
