@@ -4,7 +4,7 @@ const HamburgerIcon = () => {
   const { menu, toggleMenu } = useMenu();
   return (
     <button
-      className="h-5 w-5 border-none shadow-none hover:shadow-none hover:border-none "
+      className="h-5 w-5 bg-background border-none shadow-none hover:shadow-none hover:border-none "
       onClick={toggleMenu}
     >
       <div

@@ -31,9 +31,13 @@ function Header({ showLogo = false }) {
       <Container maxWidth="xl">
         <Toolbar disableGutters className="flex justify-between">
           <Box className="flex justify-center items-center gap-2">
-            {showLogo && <Logo />}
             <CustomMenu />
           </Box>
+          {showLogo && (
+            <Box className="flex justify-center items-center gap-2">
+              <Logo />
+            </Box>
+          )}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="My Profile">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
