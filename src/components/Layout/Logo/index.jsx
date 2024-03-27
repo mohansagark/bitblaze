@@ -19,7 +19,7 @@ const Logo = () => {
           textDecoration: "none",
         }}
       >
-        CODENEST
+        BITBLAZE
       </Typography>
     </>
   );
