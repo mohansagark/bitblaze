@@ -1,5 +1,5 @@
 import React from "react";
-import { Drawer, Tooltip } from "@mui/material";
+import { Drawer } from "@mui/material";
 import { useMenu } from "../../../helpers/hooks";
 import MenuBlock from "./MenuBlock";
 import HamburgerIcon from "../../common/HamburgerIcon";
