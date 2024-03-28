@@ -5,8 +5,8 @@ import { menuList, sidebarWidth } from "../../../helpers/config";
 const SidebarDrawer = () => {
   return (
     <nav
-      className={`bg-surface h-full transition-all duration-400 ease-in-out w-[${sidebarWidth}]`}
-      style={{ transition: "width 400ms ease" }}
+      className={`bg-surface h-full`}
+      style={{ transition: "width 400ms ease", width: sidebarWidth }}
     >
       <List component="menu">
         {menuList.map((item, _index) => (

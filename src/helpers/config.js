@@ -1,9 +1,12 @@
 import { FiCreditCard } from "react-icons/fi";
 import { BsCurrencyDollar, BsShield } from "react-icons/bs";
+import { GiRollingDices } from "react-icons/gi";
+import { FaChess } from "react-icons/fa";
+import { GiPapers } from "react-icons/gi";
 
 export const scrollDuration = 1000;
 
-export const sidebarWidth = "300px";
+export const sidebarWidth = "250px";
 
 export const mobileSidebarWidth = "80vw";
 
@@ -49,15 +52,15 @@ export const userProfileData = [
 
 export const menuList = [
   {
-    icon: <BsCurrencyDollar />,
-    title: "My Profile",
+    icon: <GiRollingDices />,
+    title: "Snakes & Ladder",
   },
   {
-    icon: <BsShield />,
-    title: "My Inbox",
+    icon: <FaChess />,
+    title: "Chess Board",
   },
   {
-    icon: <FiCreditCard />,
-    title: "My Tasks",
+    icon: <GiPapers />,
+    title: "Rock Paper Scissors",
   },
 ];

@@ -29,7 +29,7 @@ function Header({ showLogo = false }) {
       className="bg-background"
       sx={{
         boxShadow: "none",
-        width: menu ? `calc(100% - ${sidebarWidth})` : "100%",
+        width: menu ? `calc(100vw - ${sidebarWidth})` : "100vw",
         transition: "width 400ms ease",
       }}
     >

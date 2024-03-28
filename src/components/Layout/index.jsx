@@ -14,8 +14,8 @@ const Layout = ({ children = <></> }) => {
         <Grid
           className={`transition bg-surface ${
             menu ? "opacity-100" : "opacity-0"
-          } w-[${sidebarWidth}]`}
-          sx={{ transition: "width 400ms ease" }}
+          }`}
+          sx={{ transition: "width 400ms ease", width: sidebarWidth }}
           item
         >
           <SideDrawer />
