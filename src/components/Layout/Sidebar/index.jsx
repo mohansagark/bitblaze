@@ -1,10 +1,13 @@
 import React from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
-import { menuList } from "../../../helpers/config";
+import { menuList, sidebarWidth } from "../../../helpers/config";
 
 const SidebarDrawer = () => {
   return (
-    <nav className="w-64 bg-surface h-full">
+    <nav
+      className={`bg-surface h-full transition-all duration-400 ease-in-out w-[${sidebarWidth}]`}
+      style={{ transition: "width 400ms ease" }}
+    >
       <List component="menu">
         {menuList.map((item, _index) => (
           <ListItem key={_index}>
