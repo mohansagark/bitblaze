@@ -46,3 +46,18 @@ export const userProfileData = [
     iconBg: "rgb(254, 201, 15)",
   },
 ];
+
+export const menuList = [
+  {
+    icon: <BsCurrencyDollar />,
+    title: "My Profile",
+  },
+  {
+    icon: <BsShield />,
+    title: "My Inbox",
+  },
+  {
+    icon: <FiCreditCard />,
+    title: "My Tasks",
+  },
+];

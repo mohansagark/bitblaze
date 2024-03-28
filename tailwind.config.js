@@ -45,6 +45,9 @@ module.exports = {
         accent1: "var(--color-accent-1) !important",
         accent2: "var(--color-accent-2) !important",
       },
+      boxShadow: {
+        no: "none",
+      },
       borderWidth: {
         1: "1px",
       },

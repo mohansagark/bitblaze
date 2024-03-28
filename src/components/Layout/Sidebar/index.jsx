@@ -1,34 +1,26 @@
 import React from "react";
-import { List, ListItem, ListItemText } from "@mui/material";
-import {
-  RiHome2Fill,
-  RiInformationFill,
-  RiServiceFill,
-  RiContactsFill,
-} from "react-icons/ri";
+import { Box, List, ListItem, ListItemText } from "@mui/material";
+import SearchInput from "../../common/Search";
+import { menuList } from "../../../helpers/config";
 
 const SidebarDrawer = () => {
+  const onSearch = () => {};
   return (
-    <div className="w-64 bg-surface h-full">
-      <List component="nav">
-        <ListItem>
-          <RiHome2Fill className="text-primary mr-2" />
-          <ListItemText primary="Home" className="text-primary" />
+    <nav className="w-64 bg-surface h-full">
+      <List component="menu">
+        <ListItem component="li">
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <SearchInput onSearch={onSearch} />
+          </Box>
         </ListItem>
-        <ListItem>
-          <RiInformationFill className="text-primary mr-2" />
-          <ListItemText primary="About" className="text-primary" />
-        </ListItem>
-        <ListItem>
-          <RiServiceFill className="text-primary mr-2" />
-          <ListItemText primary="Services" className="text-primary" />
-        </ListItem>
-        <ListItem>
-          <RiContactsFill className="text-primary mr-2" />
-          <ListItemText primary="Contact" className="text-primary" />
-        </ListItem>
+        {menuList.map((item, _index) => (
+          <ListItem key={_index}>
+            <div className="text-primary mr-2">{item.icon}</div>
+            <ListItemText primary={item.title} className="text-primary" />
+          </ListItem>
+        ))}
       </List>
-    </div>
+    </nav>
   );
 };
 
