@@ -8,13 +8,7 @@ const CustomMenu = () => {
   const { menu, toggleMenu, isMobile } = useMenu();
   return (
     <>
-      <aside>
-        <Tooltip title="Menu" placement="top">
-          <>
-            <HamburgerIcon />
-          </>
-        </Tooltip>
-      </aside>
+      <HamburgerIcon />
       <Drawer anchor={"left"} open={isMobile && menu} onClose={toggleMenu}>
         <MenuBlock />
       </Drawer>
