@@ -10,10 +10,11 @@ import UserProfile from "../UserProfile";
 import { Popover } from "@mui/material";
 import Logo from "../Logo";
 import CustomMenu from "../Menu";
+import { useMenu } from "../../../helpers/hooks";
 
 function Header({ showLogo = false }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const { menu, sidebarWidth } = useMenu();
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -24,9 +25,13 @@ function Header({ showLogo = false }) {
 
   return (
     <AppBar
-      position="static"
+      position="fixed"
       className="bg-background"
-      sx={{ boxShadow: "none" }}
+      sx={{
+        boxShadow: "none",
+        width: menu ? `calc(100% - ${sidebarWidth})` : "100%",
+        transition: "width 400ms ease",
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters className="flex justify-between">

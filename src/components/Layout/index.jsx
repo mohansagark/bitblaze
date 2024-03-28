@@ -9,7 +9,7 @@ const Layout = ({ children = <></> }) => {
   const { menu, isMobile, sidebarWidth } = useMenu();
 
   return (
-    <Grid className="contents" sx={{ flexGrow: 1 }}>
+    <Grid className="contents h-full overflow-y-auto" sx={{ flexGrow: 1 }}>
       {!isMobile && (
         <Grid
           className={`transition bg-surface ${
@@ -21,7 +21,7 @@ const Layout = ({ children = <></> }) => {
           <SideDrawer />
         </Grid>
       )}
-      <Grid className="transition" item sx={{ flex: 1 }}>
+      <Grid className="transition h-full overflow-y-auto" item sx={{ flex: 1 }}>
         <Header showLogo />
         <Grid className="bg-background h-[calc(100vh - 164px)] mt-0 overflow-hidden">
           {children}
