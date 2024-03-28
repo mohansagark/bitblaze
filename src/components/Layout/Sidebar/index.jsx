@@ -9,7 +9,10 @@ const SidebarDrawer = () => {
         {menuList.map((item, _index) => (
           <ListItem key={_index}>
             <div className="text-primary mr-2">{item.icon}</div>
-            <ListItemText primary={item.title} className="text-primary" />
+            <ListItemText
+              primary={item.title}
+              className="text-primary whitespace-nowrap"
+            />
           </ListItem>
         ))}
       </List>
