@@ -1,18 +1,17 @@
 import { useEffect } from "react";
 import { Outlet, createBrowserRouter } from "react-router-dom";
-
 import Layout from "../components/Layout";
 import ErrorPage from "../pages/Error";
-import { useStateContext } from "../themes";
 import routes from "./routes";
 import { fetchStore } from "../helpers/general";
 import { useDispatch } from "react-redux";
 import { setMobile } from "../redux/slices/generalSlice";
 import { useMediaQuery } from "@mui/material";
 import { mobileViewBreakPoint } from "../helpers/config";
+import { useTheme } from "../helpers/hooks";
 
 const LayoutComponent = () => {
-  const { changeColor, changeMode } = useStateContext();
+  const { changeColor, changeMode } = useTheme();
   const dispatch = useDispatch();
   const isMobile = useMediaQuery(mobileViewBreakPoint);
 
@@ -23,7 +22,7 @@ const LayoutComponent = () => {
   useEffect(() => {
     const currentThemeColor = fetchStore("colorMode");
     const currentThemeMode = fetchStore("themeMode");
-    if (currentThemeColor && currentThemeMode) {
+    if (currentThemeColor || currentThemeMode) {
       changeColor(currentThemeColor);
       changeMode(currentThemeMode);
     }

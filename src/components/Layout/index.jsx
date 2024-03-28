@@ -22,7 +22,7 @@ const Layout = ({ children = <></> }) => {
         </Grid>
       )}
       <Grid className="transition h-full overflow-y-auto" item sx={{ flex: 1 }}>
-        <Header showLogo />
+        <Header />
         <Grid className="bg-background h-[calc(100vh - 100px)] mt-0 overflow-hidden">
           {children}
         </Grid>

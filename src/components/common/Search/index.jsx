@@ -1,46 +1,45 @@
-import { useState } from "react";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
-import { MdClear, MdManageSearch } from "react-icons/md";
+import React, { useState } from "react";
+import { IoIosSearch } from "react-icons/io";
+import { MdClear } from "react-icons/md";
 
-const SearchInput = ({ onSearch }) => {
-  const [value, setValue] = useState("");
-  const onChangeInput = (text) => {
-    setValue(text);
-    onSearch(text);
+const SearchBar = ({ onSearch = () => null }) => {
+  const [query, setQuery] = useState("");
+
+  const search = (q) => {
+    setQuery(q);
+    onSearch(q);
+  };
+
+  const clearSearch = () => {
+    setQuery("");
   };
 
   return (
-    <TextField
-      placeholder="Search"
-      type="text"
-      variant="standard"
-      value={value}
-      fullWidth
-      size="small"
-      onChange={(e) => onChangeInput(e.target.value)}
-      className=" border-primary shadow-none"
-      InputLabelProps={{ className: "text-primary text-xs" }}
-      InputProps={{
-        className:
-          "border-primary text-primary shadow-none hover:shadow-none before:border-primary after:border-primary text-xs",
-        startAdornment: (
-          <InputAdornment position="start">
-            <MdManageSearch className="text-primary mr-px my-px" size={26} />
-          </InputAdornment>
-        ),
-
-        endAdornment: value && (
-          <IconButton
-            aria-label="toggle password visibility"
-            className="!p-0"
-            onClick={() => onChangeInput("")}
-          >
-            <MdClear className="text-primary mr-px my-px" size={16} />
-          </IconButton>
-        ),
-      }}
-    />
+    <div className="flex justify-center rounded-lg overflow-hidden">
+      <button
+        type="submit"
+        className="bg-background hover:bg-background text-primary pl-3 py-2"
+      >
+        <IoIosSearch size={20} />
+      </button>
+      <input
+        type="text"
+        placeholder="Search..."
+        className="w-full border text-primary outline-none bg-background border-background pl-1 py-2 align-middle"
+        value={query}
+        onChange={(e) => search(e.target.value)}
+      />
+      {query && (
+        <button
+          type="submit"
+          className="bg-background hover:bg-background text-primary pr-2 py-2"
+          onClick={clearSearch}
+        >
+          <MdClear size={16} />
+        </button>
+      )}
+    </div>
   );
 };
 
-export default SearchInput;
+export default SearchBar;

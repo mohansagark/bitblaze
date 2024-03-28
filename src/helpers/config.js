@@ -4,6 +4,8 @@ import { GiRollingDices } from "react-icons/gi";
 import { FaChess } from "react-icons/fa";
 import { GiPapers } from "react-icons/gi";
 
+export const version = "Beta 0.0.1";
+
 export const scrollDuration = 1000;
 
 export const sidebarWidth = "250px";

@@ -1,9 +1,12 @@
 import Typography from "@mui/material/Typography";
 import { FaCode } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Logo = () => {
+  const navigate = useNavigate();
+  const gotoHome = () => navigate("/");
   return (
-    <>
+    <div className="flex whitespace-nowrap cursor-pointer" onClick={gotoHome}>
       <FaCode size={36} className="text-primary flex mr-2" />
       <Typography
         variant="h6"
@@ -21,7 +24,7 @@ const Logo = () => {
       >
         BITBLAZE
       </Typography>
-    </>
+    </div>
   );
 };
 

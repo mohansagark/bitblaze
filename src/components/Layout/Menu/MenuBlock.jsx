@@ -12,8 +12,7 @@ const MenuBlock = () => {
       sx={{ width: mobileSidebarWidth }}
       className="h-full bg-surface"
     >
-      <div className="flex justify-between items-center p-4 ml-4">
-        <p className="font-semibold text-lg text-surface-text">Menu</p>
+      <div className="absolute right-5 top-5">
         <MdOutlineClose
           size={24}
           className="text-primary"
