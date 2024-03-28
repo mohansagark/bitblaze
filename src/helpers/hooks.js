@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { setMenubar } from "../redux/slices/generalSlice";
-import { sidebarWidth as sbWidth } from "./config";
+import { sidebarWidth as sbWidth, headerHeight, footerHeight } from "./config";
 import { ThemeContext } from "../themes";
 
 export const useTheme = () => useContext(ThemeContext);
@@ -16,5 +16,12 @@ export const useMenu = () => {
     dispatch(setMenubar(!menu)); // Dispatching the action to toggle the menu
   };
 
-  return { menu, toggleMenu, isMobile, sidebarWidth }; // Returning menu state and toggleMenu function
+  return {
+    menu,
+    toggleMenu,
+    isMobile,
+    sidebarWidth,
+    headerHeight,
+    footerHeight,
+  }; // Returning menu state and toggleMenu function
 };

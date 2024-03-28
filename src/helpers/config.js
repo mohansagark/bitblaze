@@ -3,10 +3,15 @@ import { BsCurrencyDollar, BsShield } from "react-icons/bs";
 import { GiRollingDices } from "react-icons/gi";
 import { FaChess } from "react-icons/fa";
 import { GiPapers } from "react-icons/gi";
+import { routePaths } from "../router/routeConstants";
 
 export const version = "Beta 0.0.1";
 
 export const scrollDuration = 1000;
+
+export const headerHeight = "64px";
+
+export const footerHeight = "100px";
 
 export const sidebarWidth = "250px";
 
@@ -56,13 +61,16 @@ export const menuList = [
   {
     icon: <GiRollingDices />,
     title: "Snakes & Ladder",
+    path: routePaths.snakesAndLadders,
   },
   {
     icon: <FaChess />,
     title: "Chess Board",
+    path: routePaths.chessboard,
   },
   {
     icon: <GiPapers />,
     title: "Rock Paper Scissors",
+    path: routePaths.rockPaperScissors,
   },
 ];

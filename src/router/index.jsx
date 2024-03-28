@@ -30,7 +30,7 @@ const LayoutComponent = () => {
 
   return (
     <Layout>
-      <main>
+      <main className="w-full">
         <Outlet />
       </main>
     </Layout>

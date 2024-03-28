@@ -3,8 +3,13 @@ import { List, ListItem, ListItemText } from "@mui/material";
 import { menuList, sidebarWidth, version } from "../../../helpers/config";
 import Logo from "../Logo";
 import SearchInput from "../../common/Search";
+import { useNavigate } from "react-router-dom";
 
 const SidebarDrawer = () => {
+  const navigate = useNavigate();
+  const gotoRoute = (path) => {
+    navigate(path);
+  };
   return (
     <nav
       className={`flex flex-col bg-surface h-full`}
@@ -22,6 +27,7 @@ const SidebarDrawer = () => {
             <ListItemText
               primary={item.title}
               className="text-primary whitespace-nowrap"
+              onClick={() => gotoRoute(item.path)}
             />
           </ListItem>
         ))}

@@ -3,7 +3,7 @@ import IntroSecDetails from "../../data/introSection.json";
 
 const Home = () => {
   return (
-    <div className="flex justify-center items-center flex-col p-5 text-center h-[calc(100vh-100px)]">
+    <div className="flex justify-center items-center flex-col p-5 text-center min-h-full">
       <p className="text-5 text-uppercase text-4xl text-primary ls-4 mb-2 mb-md-3">
         {IntroSecDetails.heading1}
       </p>

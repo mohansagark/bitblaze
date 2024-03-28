@@ -6,7 +6,8 @@ import SideDrawer from "./Sidebar";
 import { useMenu } from "../../helpers/hooks";
 
 const Layout = ({ children = <></> }) => {
-  const { menu, isMobile, sidebarWidth } = useMenu();
+  const { menu, isMobile, sidebarWidth, headerHeight, footerHeight } =
+    useMenu();
 
   return (
     <Grid className="contents h-full overflow-y-auto" sx={{ flexGrow: 1 }}>
@@ -23,7 +24,13 @@ const Layout = ({ children = <></> }) => {
       )}
       <Grid className="transition h-full overflow-y-auto" item sx={{ flex: 1 }}>
         <Header />
-        <Grid className="bg-background h-[calc(100vh - 100px)] mt-0 overflow-hidden">
+        <Grid
+          className="bg-background mt-0 overflow-hidden text-primary p-5 flex"
+          sx={{
+            minHeight: `calc(100vh - ${footerHeight})`,
+            paddingTop: headerHeight,
+          }}
+        >
           {children}
         </Grid>
         <Footer />
