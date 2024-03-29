@@ -1,0 +1,50 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(
+    10,
+    50px
+  ); /* Adjust the number of columns based on your board size */
+  grid-template-rows: repeat(
+    10,
+    50px
+  ); /* Adjust the number of rows based on your board size */
+  border: 2px solid black;
+}
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  font-size: 18px;
+}
+
+.square.player {
+  background-color: yellow; /* Change the player's square color */
+}
+
+.player {
+  font-size: 24px;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
