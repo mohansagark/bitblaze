@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { setMenubar } from "../redux/slices/generalSlice";
 import { sidebarWidth as sbWidth, headerHeight, footerHeight } from "./config";
 import { ThemeContext } from "../themes";
@@ -23,5 +23,24 @@ export const useMenu = () => {
     sidebarWidth,
     headerHeight,
     footerHeight,
-  }; // Returning menu state and toggleMenu function
+  };
+};
+
+export const useAudio = () => {
+  const audioRefs = useRef({});
+
+  const playSound = (id = "audio") => {
+    const audioRef = audioRefs.current[id];
+    if (audioRef) {
+      audioRef.play();
+    }
+  };
+
+  const registerAudio = (id = "audio", variant = "button") => {
+    const audioRef = document.createElement("audio");
+    audioRef.src = `audio/${variant}.mp3`;
+    audioRefs.current[id] = audioRef;
+  };
+
+  return { playSound, registerAudio };
 };
