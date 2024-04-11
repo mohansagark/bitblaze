@@ -1,10 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useContext, useRef } from "react";
-import { setMenubar } from "../redux/slices/generalSlice";
+import {
+  setMenubar,
+  startConfetti,
+  stopConfetti,
+} from "../redux/slices/generalSlice";
 import { sidebarWidth as sbWidth, headerHeight, footerHeight } from "./config";
 import { ThemeContext } from "../themes";
 
 export const useTheme = () => useContext(ThemeContext);
+
+export const useConfetti = () => {
+  const dispatch = useDispatch();
+
+  const showConfetti = () => {
+    dispatch(startConfetti());
+  };
+  const hideConfetti = () => {
+    dispatch(stopConfetti());
+  };
+
+  return {
+    showConfetti,
+    hideConfetti,
+  };
+};
 
 export const useMenu = () => {
   const dispatch = useDispatch();

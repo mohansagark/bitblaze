@@ -9,9 +9,10 @@ import {
 } from "react-icons/fa";
 import { GiQueenCrown } from "react-icons/gi";
 import { RiCoinFill } from "react-icons/ri";
-import { useAudio } from "../../../helpers/hooks";
+import { useAudio, useConfetti } from "../../../helpers/hooks";
 
 const SnakesAndLadders = () => {
+  const { showConfetti } = useConfetti();
   const { playSound, registerAudio } = useAudio();
   const id = { won: "won-audio", error: "error-audio", roll: "roll-audio" };
   const grid = new Array(10).fill(new Array(10).fill(0));
@@ -37,21 +38,21 @@ const SnakesAndLadders = () => {
     const rollValue = Math.ceil(Math.random() * 6);
     setDiceValue(rollValue);
     setCoinPos(coinPos + rollValue < 101 ? coinPos + rollValue : coinPos);
-    if (coinPos + rollValue > 100) {
+    if (coinPos === 100) {
+      setCoinPos(0);
+    }
+    if (coinPos !== 100 && coinPos + rollValue > 100) {
       playSound(id.error);
       alert(`You need to roll ${100 - coinPos} or less to move ahead`);
     }
     if (coinPos + rollValue === 100) {
       setTimeout(() => {
         playSound(id.won);
-        alert("Winner...!!!!!");
+        showConfetti();
       }, 10);
     }
     if (coinPos + rollValue < 100) {
       playSound(id.roll);
-    }
-    if (coinPos === 100) {
-      setCoinPos(0);
     }
   };
 

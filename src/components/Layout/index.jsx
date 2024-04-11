@@ -1,11 +1,15 @@
 import React from "react";
 import { Grid } from "@mui/material";
+import { useSelector } from "react-redux";
+import Confetti from "react-confetti";
 import Header from "./Header";
 import Footer from "./Footer";
 import SideDrawer from "./Sidebar";
-import { useMenu } from "../../helpers/hooks";
+import { useConfetti, useMenu } from "../../helpers/hooks";
 
 const Layout = ({ children = <></> }) => {
+  const { confetti } = useSelector((state) => state.general);
+  const { hideConfetti } = useConfetti();
   const { menu, isMobile, sidebarWidth, headerHeight, footerHeight } =
     useMenu();
 
@@ -35,6 +39,28 @@ const Layout = ({ children = <></> }) => {
         </Grid>
         <Footer />
       </Grid>
+      {confetti.show && (
+        <Confetti
+          drawShape={(ctx) => {
+            ctx.beginPath();
+            for (let i = 0; i < 22; i++) {
+              const angle = 0.35 * i;
+              const x = (0.2 + 1.5 * angle) * Math.cos(angle);
+              const y = (0.2 + 1.5 * angle) * Math.sin(angle);
+              ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.closePath();
+          }}
+          width={confetti.width}
+          height={confetti.height}
+          recycle={confetti.recycle}
+          numberOfPieces={confetti.numberOfPieces}
+          onConfettiComplete={() => {
+            hideConfetti();
+          }}
+        />
+      )}
     </Grid>
   );
 };

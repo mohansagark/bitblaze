@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import { FaHandScissors, FaHandPaper, FaHandRock } from "react-icons/fa";
-import Confetti from "react-confetti";
 import Button from "../../../components/common/Button";
-import { useAudio } from "../../../helpers/hooks";
+import { useAudio, useConfetti } from "../../../helpers/hooks";
 
 const DATA = {
   rock: <FaHandRock size={36} />,
@@ -14,10 +13,10 @@ const DATA = {
 const CHOICES = Object.keys(DATA);
 
 const RockPaperScissors = () => {
+  const { showConfetti } = useConfetti();
   const [playerChoice, setPlayerChoice] = useState(null);
   const [computerChoice, setComputerChoice] = useState(null);
   const [result, setResult] = useState(null);
-  const [showConfetti, setShowConfetti] = useState(false);
   const { playSound, registerAudio } = useAudio();
   const id = { won: "won-audio", lost: "lost-audio" };
 
@@ -25,10 +24,6 @@ const RockPaperScissors = () => {
     registerAudio(id.won, "bell");
     registerAudio(id.lost, "aww");
   }, [registerAudio, id.lost, id.won]);
-
-  const handleConfettiComplete = () => {
-    setShowConfetti(false);
-  };
 
   const handleChoice = (choice) => {
     const computerChoice = CHOICES[Math.floor(Math.random() * CHOICES.length)];
@@ -46,7 +41,7 @@ const RockPaperScissors = () => {
       (playerChoice === "scissors" && computerChoice === "paper")
     ) {
       setResult("You win!");
-      setShowConfetti(true);
+      showConfetti();
       playSound(id.won);
     } else {
       setResult("Computer wins!");
@@ -105,26 +100,6 @@ const RockPaperScissors = () => {
           </div>
         </Grid>
       </Grid>
-      {showConfetti && (
-        <Confetti
-          drawShape={(ctx) => {
-            ctx.beginPath();
-            for (let i = 0; i < 22; i++) {
-              const angle = 0.35 * i;
-              const x = (0.2 + 1.5 * angle) * Math.cos(angle);
-              const y = (0.2 + 1.5 * angle) * Math.sin(angle);
-              ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            ctx.closePath();
-          }}
-          width={window.innerWidth}
-          height={window.innerHeight}
-          recycle={false}
-          numberOfPieces={200}
-          onConfettiComplete={handleConfettiComplete}
-        />
-      )}
     </Container>
   );
 };
