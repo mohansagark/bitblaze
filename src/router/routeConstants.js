@@ -3,4 +3,5 @@ export const routePaths = {
   snakesAndLadders: "/snakes-and-ladders",
   chessboard: "/chessboard",
   rockPaperScissors: "/rock-paper-scissors",
+  cards: "/cards",
 };

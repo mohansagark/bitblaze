@@ -2,7 +2,7 @@ import { FiCreditCard } from "react-icons/fi";
 import { BsCurrencyDollar, BsShield } from "react-icons/bs";
 import { GiRollingDices } from "react-icons/gi";
 import { FaChess } from "react-icons/fa";
-import { GiPapers } from "react-icons/gi";
+import { GiPapers, GiPokerHand } from "react-icons/gi";
 import { routePaths } from "../router/routeConstants";
 
 export const version = "Beta 0.0.1";
@@ -72,5 +72,10 @@ export const menuList = [
     icon: <GiPapers />,
     title: "Rock Paper Scissors",
     path: routePaths.rockPaperScissors,
+  },
+  {
+    icon: <GiPokerHand />,
+    title: "Cards",
+    path: routePaths.cards,
   },
 ];

@@ -1,3 +1,4 @@
+import Cards from "../pages/Games/Cards";
 import ChessBoard from "../pages/Games/ChessBoard";
 import RockPaperScissors from "../pages/Games/RockPaperScissors";
 import SnakesAndLadders from "../pages/Games/SnakesAndLadders";
@@ -20,6 +21,10 @@ const routes = [
   {
     path: routePaths.rockPaperScissors,
     element: <RockPaperScissors />,
+  },
+  {
+    path: routePaths.cards,
+    element: <Cards />,
   },
 ];
 
