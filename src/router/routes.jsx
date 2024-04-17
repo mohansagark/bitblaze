@@ -1,3 +1,4 @@
+import WhatsAppChat from "../pages/Apps/WhatsAppChat";
 import Cards from "../pages/Games/Cards";
 import ChessBoard from "../pages/Games/ChessBoard";
 import RockPaperScissors from "../pages/Games/RockPaperScissors";
@@ -25,6 +26,10 @@ const routes = [
   {
     path: routePaths.cards,
     element: <Cards />,
+  },
+  {
+    path: routePaths.whatsAppChat,
+    element: <WhatsAppChat />,
   },
 ];
 

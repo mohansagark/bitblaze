@@ -4,6 +4,7 @@ import { GiRollingDices } from "react-icons/gi";
 import { FaChess } from "react-icons/fa";
 import { GiPapers, GiPokerHand } from "react-icons/gi";
 import { routePaths } from "../router/routeConstants";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 export const version = "Beta 0.0.1";
 
@@ -62,20 +63,30 @@ export const menuList = [
     icon: <GiRollingDices />,
     title: "Snakes & Ladder",
     path: routePaths.snakesAndLadders,
+    category: "game",
   },
   {
     icon: <FaChess />,
     title: "Chess Board",
     path: routePaths.chessboard,
+    category: "game",
   },
   {
     icon: <GiPapers />,
     title: "Rock Paper Scissors",
     path: routePaths.rockPaperScissors,
+    category: "game",
   },
   {
     icon: <GiPokerHand />,
     title: "Cards",
     path: routePaths.cards,
+    category: "game",
+  },
+  {
+    icon: <IoLogoWhatsapp />,
+    title: "Whats App Chat",
+    path: routePaths.whatsAppChat,
+    category: "app",
   },
 ];

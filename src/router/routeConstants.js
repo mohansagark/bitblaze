@@ -4,4 +4,5 @@ export const routePaths = {
   chessboard: "/chessboard",
   rockPaperScissors: "/rock-paper-scissors",
   cards: "/cards",
+  whatsAppChat: "/whatsapp-chat",
 };

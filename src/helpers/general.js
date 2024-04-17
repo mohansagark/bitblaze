@@ -15,3 +15,7 @@ export const changeTheme = (theme) => {
 export const changePrimaryColor = (color) => {
   document.querySelector("html")?.setAttribute("primary-color", color);
 };
+
+export const capitalizeFirstLetter = (str) => {
+  return str.replace(/\b\w/g, (char) => char.toUpperCase());
+};
