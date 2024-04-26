@@ -77,7 +77,6 @@ input,
 button {
   font-size: 1rem;
   font-family: inherit;
-  border: none;
   padding: 0.5rem 0.75rem;
   background-color: white;
   line-height: 1.5;
@@ -426,4 +425,16 @@ i {
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
