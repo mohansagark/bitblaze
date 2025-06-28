@@ -28,7 +28,7 @@ const UserProfile = ({ closeUserProfile }) => {
           </p>
           <p className="text-sm text-neutral-400">Administrator</p>
           <p className="text-neutral-400 text-sm font-semibold">
-            contact@mohansagar.website
+            contact@devmohan.in
           </p>
         </div>
       </div>

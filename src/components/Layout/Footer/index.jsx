@@ -7,11 +7,9 @@ const Footer = () => {
       className="bg-background p-5 pr-20 text-typography"
       style={{ height: footerHeight }}
     >
-      <p className="text-primary">Author: Mohansagar K.</p>
+      <p className="text-primary">Author: Mohansagar K</p>
       <p className="text-primary">
-        <a href="mailto:contact@mohansagar.website">
-          contact@mohansagar.website
-        </a>
+        <a href="mailto:contact@devmohan.in">contact@devmohan.in</a>
       </p>
     </footer>
   );
