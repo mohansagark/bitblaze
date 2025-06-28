@@ -4,9 +4,6 @@ import { useAudio } from "../../../helpers/hooks";
 const Button = ({
   id = "button",
   icon,
-  bgColor = "var(--color-primary)",
-  bgHoverColor = "var(--color-success)",
-  textColor = "#fff",
   size = "base",
   text,
   borderRadius,
@@ -14,6 +11,7 @@ const Button = ({
   className = "",
   sound = false,
   disabled = false,
+  variant = "primary", // "primary" or "secondary"
 }) => {
   const { playSound, registerAudio } = useAudio();
 
@@ -27,21 +25,35 @@ const Button = ({
     onClick();
   };
 
+  const isPrimary = variant === "primary";
+
+  const baseStyles = {
+    backgroundColor: disabled
+      ? "var(--color-neutral-400)"
+      : isPrimary
+      ? "var(--color-primary)"
+      : "transparent",
+    color: disabled
+      ? "var(--color-neutral-100)"
+      : isPrimary
+      ? "var(--color-primary-text)"
+      : "var(--color-primary)",
+    border: isPrimary ? "none" : "1px solid var(--color-primary)",
+    borderRadius: borderRadius || "0.5rem",
+    cursor: disabled ? "not-allowed" : "pointer",
+    transition: "all 0.2s ease-in-out",
+  };
+
   return (
     <button
       id={id}
       type="button"
       onClick={onPress}
       disabled={disabled}
-      style={{
-        backgroundColor: disabled ? "var(--color-neutral-400)" : bgColor,
-        borderRadius,
-        color: textColor,
-        cursor: disabled ? "not-allowed" : "pointer",
-      }}
-      className={`w-full p-3 text-${size} transition-all duration-200 ${
-        disabled ? "opacity-60" : "hover:drop-shadow-xl"
-      } ${!disabled ? `hover:bg-[${bgHoverColor}]` : ""} ${className}`}
+      style={baseStyles}
+      className={`w-full p-3 text-${size} ${
+        disabled ? "opacity-60" : "hover:opacity-90 hover:drop-shadow-xl"
+      } ${className}`}
     >
       {icon} {text}
     </button>

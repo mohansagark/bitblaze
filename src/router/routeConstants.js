@@ -5,4 +5,5 @@ export const routePaths = {
   rockPaperScissors: "/rock-paper-scissors",
   cards: "/cards",
   whatsAppChat: "/whatsapp-chat",
+  404: "/404",
 };

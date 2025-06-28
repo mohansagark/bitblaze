@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet, createBrowserRouter } from "react-router-dom";
+import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
 import ErrorPage from "../pages/Error";
 import routes from "./routes";
@@ -9,6 +9,7 @@ import { setMobile } from "../redux/slices/generalSlice";
 import { useMediaQuery } from "@mui/material";
 import { mobileViewBreakPoint } from "../helpers/config";
 import { useTheme } from "../helpers/hooks";
+import NotFound from "../pages/common/NotFound";
 
 const LayoutComponent = () => {
   const { changeColor, changeMode } = useTheme();
@@ -49,6 +50,22 @@ const mappedRoutes = routes.map((route) => ({
   ],
 }));
 
+mappedRoutes.push(
+  {
+    path: "/404",
+    element: <LayoutComponent />,
+    children: [
+      {
+        index: true,
+        element: <NotFound />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <Navigate to="/404" replace />,
+  }
+);
 const router = createBrowserRouter(mappedRoutes);
 
 export default router;
