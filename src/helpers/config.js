@@ -1,5 +1,5 @@
-import { FiCreditCard } from "react-icons/fi";
-import { BsCurrencyDollar, BsShield } from "react-icons/bs";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { TbWorld } from "react-icons/tb";
 import { GiRollingDices } from "react-icons/gi";
 import { FaChess } from "react-icons/fa";
 import { GiPapers, GiPokerHand } from "react-icons/gi";
@@ -36,25 +36,28 @@ export const COLORS = {
 
 export const userProfileData = [
   {
-    icon: <BsCurrencyDollar />,
-    title: "My Profile",
-    desc: "Account Settings",
-    iconColor: "#03C9D7",
-    iconBg: "#E5FAFB",
+    icon: <FaLinkedin />,
+    title: "LinkedIn",
+    desc: "Connect with me",
+    iconColor: "#0077B5",
+    iconBg: "#E8F4F9",
+    link: "https://www.linkedin.com/in/mohansagark/",
   },
   {
-    icon: <BsShield />,
-    title: "My Inbox",
-    desc: "Messages & Emails",
-    iconColor: "rgb(0, 194, 146)",
-    iconBg: "rgb(235, 250, 242)",
+    icon: <FaGithub />,
+    title: "GitHub",
+    desc: "View my code",
+    iconColor: "#333",
+    iconBg: "#F0F0F0",
+    link: "https://github.com/mohansagark",
   },
   {
-    icon: <FiCreditCard />,
-    title: "My Tasks",
-    desc: "To-do and Daily Tasks",
-    iconColor: "rgb(255, 244, 229)",
-    iconBg: "rgb(254, 201, 15)",
+    icon: <TbWorld />,
+    title: "Portfolio",
+    desc: "Explore my work",
+    iconColor: "#4B5563",
+    iconBg: "#E5E7EB",
+    link: "https://devmohan.in",
   },
 ];
 

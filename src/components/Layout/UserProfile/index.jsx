@@ -1,21 +1,21 @@
-import React from "react";
 import { MdClose } from "react-icons/md";
-
 import { userProfileData } from "../../../helpers/config";
-import avatar from "../../../data/avatag.jpeg";
-import Button from "../../common/Button";
+import avatar from "../../../assets/images/avatar.jpeg";
 
 const UserProfile = ({ closeUserProfile }) => {
   return (
     <div className="nav-item right-1 top-16 bg-surface opacity-95 p-8 rounded-lg w-96">
+      {/* Header */}
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg text-surface-text">User Profile</p>
+        <p className="font-semibold text-lg text-surface-text">About Author</p>
         <MdClose
           onClick={closeUserProfile}
           size={24}
           className="text-surface-text cursor-pointer"
         />
       </div>
+
+      {/* Author Info */}
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
         <img
           className="rounded-full h-24 w-24"
@@ -32,16 +32,23 @@ const UserProfile = ({ closeUserProfile }) => {
           </p>
         </div>
       </div>
+
+      {/* Profile Items */}
       <div>
         {userProfileData.map((item, index) => (
           <div
             key={index}
-            className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]"
+            onClick={() => item.link && window.open(item.link, "_blank")}
+            className={`flex gap-5 p-4 cursor-pointer hover:bg-light-gray dark:hover:bg-[#42464D] ${
+              index !== userProfileData.length - 1
+                ? "border-b-1 border-color"
+                : ""
+            }`}
           >
             <button
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-              className=" text-xl rounded-lg p-3 hover:bg-light-gray"
+              className="text-xl rounded-lg p-3 pointer-events-none"
             >
               {item.icon}
             </button>
@@ -52,14 +59,6 @@ const UserProfile = ({ closeUserProfile }) => {
             </div>
           </div>
         ))}
-      </div>
-      <div className="mt-5">
-        <Button
-          className="text-primary-text"
-          bgColor="bg-primary"
-          text="Logout"
-          borderRadius="10px"
-        />
       </div>
     </div>
   );
