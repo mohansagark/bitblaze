@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { HelmetProvider } from "react-helmet-async";
 
 import router from "./router";
 import "./styles.scss";
@@ -13,13 +14,15 @@ import { store } from "./redux/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <StoreProvider store={store}>
-        <ThemeSettings />
-        <RouterProvider router={router} />
-      </StoreProvider>
-    </ThemeProvider>
-    <Analytics />
-    <SpeedInsights />
+    <HelmetProvider>
+      <ThemeProvider>
+        <StoreProvider store={store}>
+          <ThemeSettings />
+          <RouterProvider router={router} />
+        </StoreProvider>
+      </ThemeProvider>
+      <Analytics />
+      <SpeedInsights />
+    </HelmetProvider>
   </React.StrictMode>
 );
