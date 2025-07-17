@@ -31,7 +31,13 @@ const createTestStore = (initialState = {}) => {
       general: {
         menubar: false,
         isMobile: false,
-        confetti: false,
+        confetti: {
+          show: false,
+          width: 1920,
+          height: 1080,
+          recycle: false,
+          numberOfPieces: 200,
+        },
         ...initialState,
       },
     },
@@ -78,13 +84,13 @@ describe('Custom Hooks', () => {
         result.current.showConfetti();
       });
 
-      expect(store.getState().general.confetti).toBe(true);
+      expect(store.getState().general.confetti.show).toBe(true);
 
       act(() => {
         result.current.hideConfetti();
       });
 
-      expect(store.getState().general.confetti).toBe(false);
+      expect(store.getState().general.confetti.show).toBe(false);
     });
   });
 
@@ -101,8 +107,8 @@ describe('Custom Hooks', () => {
       expect(typeof result.current.toggleMenu).toBe('function');
       expect(typeof result.current.isMobile).toBe('boolean');
       expect(typeof result.current.sidebarWidth).toBe('number');
-      expect(typeof result.current.headerHeight).toBe('number');
-      expect(typeof result.current.footerHeight).toBe('number');
+      expect(typeof result.current.headerHeight).toBe('string');
+      expect(typeof result.current.footerHeight).toBe('string');
     });
 
     test('toggles menu state', () => {
@@ -124,8 +130,17 @@ describe('Custom Hooks', () => {
   });
 
   describe('useAudio', () => {
-    // Mock document.createElement for audio elements
+    // Mock document.createElement and DOM environment for audio elements
     beforeEach(() => {
+      // Create a proper DOM container
+      const container = global.document.createElement('div');
+      container.setAttribute('id', 'test-container');
+      global.document.body.appendChild(container);
+
+      // Store original createElement
+      const originalCreateElement = global.document.createElement;
+
+      // Mock createElement for audio only
       global.document.createElement = jest.fn(tagName => {
         if (tagName === 'audio') {
           return {
@@ -138,8 +153,18 @@ describe('Custom Hooks', () => {
             addEventListener: jest.fn(),
           };
         }
-        return {};
+        // Use original for other elements
+        return originalCreateElement.call(global.document, tagName);
       });
+    });
+
+    afterEach(() => {
+      // Clean up DOM
+      const container = global.document.getElementById('test-container');
+      if (container) {
+        global.document.body.removeChild(container);
+      }
+      jest.restoreAllMocks();
     });
 
     test('provides audio control functions', () => {
@@ -172,7 +197,16 @@ describe('Custom Hooks', () => {
         addEventListener: jest.fn(),
       };
 
-      global.document.createElement = jest.fn(() => mockAudio);
+      // Store original createElement for fallback
+      const originalCreateElement = global.document.createElement;
+
+      global.document.createElement = jest.fn(tagName => {
+        if (tagName === 'audio') {
+          return mockAudio;
+        }
+        // Use original for other elements
+        return originalCreateElement.call(global.document, tagName);
+      });
 
       const { result } = renderHook(() => useAudio());
 

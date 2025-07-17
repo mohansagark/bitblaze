@@ -12,32 +12,50 @@ jest.mock('@mui/material/styles', () => ({
   styled: component => () => component,
 }));
 
-jest.mock('@mui/material', () => ({
-  Switch: ({ checked, onChange, ...props }) =>
-    React.createElement('input', {
-      type: 'checkbox',
-      checked: checked,
-      onChange: onChange,
-      'data-testid': 'mui-switch',
-      ...props,
-    }),
-  FormGroup: ({ children }) =>
-    React.createElement('div', { 'data-testid': 'form-group' }, children),
-  FormControlLabel: ({ control, checked, onChange, ...props }) =>
-    React.createElement(
+// Mock individual Material-UI components
+jest.mock('@mui/material/FormGroup', () => {
+  const mockReact = require('react');
+  return function FormGroup({ children }) {
+    return mockReact.createElement(
+      'div',
+      { 'data-testid': 'form-group' },
+      children
+    );
+  };
+});
+
+jest.mock('@mui/material/FormControlLabel', () => {
+  const mockReact = require('react');
+  return function FormControlLabel({ control, checked, onChange, ...props }) {
+    return mockReact.createElement(
       'label',
       { 'data-testid': 'form-control-label' },
-      React.cloneElement(control, { checked, onChange })
-    ),
-  Stack: ({ children }) =>
-    React.createElement('div', { 'data-testid': 'stack' }, children),
-  Typography: ({ children, className }) =>
-    React.createElement(
-      'span',
-      { 'data-testid': 'typography', className },
-      children
-    ),
-}));
+      mockReact.cloneElement(control, { checked, onChange })
+    );
+  };
+});
+
+jest.mock('@mui/material', () => {
+  const mockReact = require('react');
+  return {
+    Switch: ({ checked, onChange, ...props }) =>
+      mockReact.createElement('input', {
+        type: 'checkbox',
+        checked: checked,
+        onChange: onChange,
+        'data-testid': 'mui-switch',
+        ...props,
+      }),
+    Stack: ({ children }) =>
+      mockReact.createElement('div', { 'data-testid': 'stack' }, children),
+    Typography: ({ children, className }) =>
+      mockReact.createElement(
+        'span',
+        { 'data-testid': 'typography', className },
+        children
+      ),
+  };
+});
 
 describe('Switch Component', () => {
   test('renders with default structure', () => {
@@ -117,7 +135,8 @@ describe('Switch Component', () => {
     render(<Switch checked={false} setChecked={mockSetChecked} />);
 
     const switchElement = screen.getByTestId('mui-switch');
-    fireEvent.change(switchElement, { target: { checked: true } });
+    // Use click instead of change event since our mock handles click
+    fireEvent.click(switchElement);
 
     expect(mockSetChecked).toHaveBeenCalledWith(true);
   });
@@ -126,7 +145,9 @@ describe('Switch Component', () => {
     const mockSetChecked = jest.fn();
     const user = userEvent.setup();
 
-    render(<Switch checked={false} setChecked={mockSetChecked} />);
+    const { unmount } = render(
+      <Switch checked={false} setChecked={mockSetChecked} />
+    );
 
     const switchElement = screen.getByTestId('mui-switch');
 
@@ -134,7 +155,8 @@ describe('Switch Component', () => {
     await user.click(switchElement);
     expect(mockSetChecked).toHaveBeenNthCalledWith(1, true);
 
-    // Second click (simulating checked=true state)
+    // Unmount first component and render second with checked=true state
+    unmount();
     mockSetChecked.mockClear();
     render(<Switch checked={true} setChecked={mockSetChecked} />);
     const newSwitchElement = screen.getByTestId('mui-switch');

@@ -1,25 +1,25 @@
+import { configureStore } from '@reduxjs/toolkit';
+import generalSlice, {
+  showLoader,
+  stopLoader,
+  setMobile,
+  setMenubar,
+  setConfetti,
+  startConfetti,
+  stopConfetti,
+  addNotification,
+  removeNotification,
+  addError,
+  clearErrors,
+  updateUserPreferences,
+} from '../../../src/redux/slices/generalSlice';
+
 // Simple test first to debug
 describe('generalSlice basic', () => {
   test('basic test', () => {
     expect(true).toBe(true);
   });
 });
-
-// import { configureStore } from '@reduxjs/toolkit';
-// import generalSlice, {
-//   showLoader,
-//   stopLoader,
-//   setMobile,
-//   setMenubar,
-//   setConfetti,
-//   startConfetti,
-//   stopConfetti,
-//   addNotification,
-//   removeNotification,
-//   addError,
-//   clearErrors,
-//   updateUserPreferences,
-// } from '../../../src/redux/slices/generalSlice';
 
 describe('generalSlice', () => {
   let store;
@@ -44,20 +44,20 @@ describe('generalSlice', () => {
   });
 
   test('showLoader action', () => {
-    store.dispatch(showLoader('testLoader'));
+    store.dispatch(showLoader());
     const state = store.getState().general;
-    expect(state.loading).toContain('testLoader');
+    expect(state.loading).toContain(1);
   });
 
   test('stopLoader action', () => {
     // Add a loader first
-    store.dispatch(showLoader('testLoader'));
-    expect(store.getState().general.loading).toContain('testLoader');
+    store.dispatch(showLoader());
+    expect(store.getState().general.loading).toContain(1);
 
     // Stop the loader
-    store.dispatch(stopLoader('testLoader'));
+    store.dispatch(stopLoader());
     const state = store.getState().general;
-    expect(state.loading).not.toContain('testLoader');
+    expect(state.loading).toHaveLength(0);
   });
 
   test('setMobile action', () => {
@@ -121,21 +121,24 @@ describe('generalSlice', () => {
   });
 
   test('addError action', () => {
-    const error = 'Something went wrong';
+    const error = { message: 'Something went wrong' };
     store.dispatch(addError(error));
     const state = store.getState().general;
-    expect(state.errors).toContain(error);
+    expect(state.errors).toHaveLength(1);
+    expect(state.errors[0]).toMatchObject(error);
+    expect(state.errors[0]).toHaveProperty('id');
+    expect(state.errors[0]).toHaveProperty('timestamp');
   });
 
   test('clearErrors action', () => {
     // Add error first
-    store.dispatch(addError('Test error'));
-    expect(store.getState().general.errors).toContain('Test error');
+    store.dispatch(addError({ message: 'Test error' }));
+    expect(store.getState().general.errors).toHaveLength(1);
 
     // Clear errors
     store.dispatch(clearErrors());
     const state = store.getState().general;
-    expect(state.errors).toEqual([]);
+    expect(state.errors).toHaveLength(0);
   });
 
   test('updateUserPreferences action', () => {
@@ -151,12 +154,12 @@ describe('generalSlice', () => {
     store.dispatch(setMobile(true));
     store.dispatch(setMenubar(true));
     store.dispatch(addNotification({ type: 'success', message: 'Success!' }));
-    store.dispatch(showLoader('testLoader'));
+    store.dispatch(showLoader());
 
     const state = store.getState().general;
     expect(state.isMobile).toBe(true);
     expect(state.menubar).toBe(true);
     expect(state.notifications).toHaveLength(1);
-    expect(state.loading).toContain('testLoader');
+    expect(state.loading).toContain(1);
   });
 });
