@@ -2,12 +2,7 @@ import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  useTheme,
-  useConfetti,
-  useMenu,
-  useAudio,
-} from '../../src/helpers/hooks';
+import { useTheme, useConfetti, useMenu, useAudio } from '../../src/helpers/hooks';
 import { ThemeContext } from '../../src/themes';
 import generalSlice from '../../src/redux/slices/generalSlice';
 
@@ -44,9 +39,7 @@ const createTestStore = (initialState = {}) => {
   });
 };
 
-const MockReduxProvider = ({ children, store }) => (
-  <Provider store={store}>{children}</Provider>
-);
+const MockReduxProvider = ({ children, store }) => <Provider store={store}>{children}</Provider>;
 
 describe('Custom Hooks', () => {
   describe('useTheme', () => {
@@ -159,10 +152,11 @@ describe('Custom Hooks', () => {
     });
 
     afterEach(() => {
-      // Clean up DOM
+      // Clean up DOM - this is test setup cleanup, not component testing
+      // eslint-disable-next-line testing-library/no-node-access
       const container = global.document.getElementById('test-container');
       if (container) {
-        global.document.body.removeChild(container);
+        container.remove();
       }
       jest.restoreAllMocks();
     });

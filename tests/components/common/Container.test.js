@@ -1,6 +1,35 @@
 /**
- * Tests for Container component
- */
+ * Tests for Container   test('r  test('re  test('applies center styles when center prop is true', () => {
+    render(
+      <Container center>
+        <p>Centered content</p>
+      </Container>,
+    );
+
+    const containerDiv = screen.getByText('Centered content').parentElement;
+    expect(containerDiv).toHaveClass('flex', 'items-center', 'justify-center');
+    expect(screen.getByText('Centered content')).toBeInTheDocument();
+  });center prop true', () => {
+    const { container } = render(
+      <Container center={true}>
+        <p>Centered content</p>
+      </Container>,
+    );
+
+    const containerDiv = screen.getByRole('generic');
+    expect(containerDiv).toHaveClass('flex', 'items-center', 'justify-center');
+    expect(screen.getByText('Centered content')).toBeInTheDocument();
+  }); center prop true', () => {
+    render(
+      <Container center={true}>
+        <p>Centered content</p>
+      </Container>,
+    );
+
+    const containerDiv = screen.getByRole('generic');
+    expect(containerDiv).toHaveClass('flex', 'items-center', 'justify-center');
+    expect(screen.getByText('Centered content')).toBeInTheDocument();
+  });*/
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
@@ -10,7 +39,9 @@ describe('Container Component', () => {
   test('renders with default props', () => {
     const { container } = render(<Container />);
 
-    const containerDiv = container.querySelector('div');
+    // Testing container styling requires direct DOM access
+    // eslint-disable-next-line testing-library/no-node-access
+    const containerDiv = container.firstChild;
     expect(containerDiv).toBeInTheDocument();
     expect(containerDiv).toHaveClass('w-full', 'min-h-full', 'bg-background');
   });
@@ -19,35 +50,38 @@ describe('Container Component', () => {
     render(
       <Container>
         <p>Test content</p>
-      </Container>
+      </Container>,
     );
 
     expect(screen.getByText('Test content')).toBeInTheDocument();
   });
 
   test('applies center styles when center prop is true', () => {
-    const { container } = render(
+    render(
       <Container center={true}>
         <p>Centered content</p>
-      </Container>
+      </Container>,
     );
 
-    const containerDiv = container.querySelector('div');
+    // Testing container styling requires DOM access
+    // eslint-disable-next-line testing-library/no-node-access
+    const containerDiv = screen.getByText('Centered content').closest('div');
     expect(containerDiv).toHaveClass('flex', 'items-center', 'justify-center');
     expect(screen.getByText('Centered content')).toBeInTheDocument();
   });
 
   test('does not apply center styles when center prop is false', () => {
-    const { container } = render(
+    render(
       <Container center={false}>
         <p>Non-centered content</p>
-      </Container>
+      </Container>,
     );
 
-    const containerDiv = container.querySelector('div');
-    expect(containerDiv).not.toHaveClass('flex');
-    expect(containerDiv).not.toHaveClass('items-center');
-    expect(containerDiv).not.toHaveClass('justify-center');
+    // Testing container styling requires DOM access
+    // eslint-disable-next-line testing-library/no-node-access
+    const containerDiv = screen.getByText('Non-centered content').closest('div');
+    expect(containerDiv).not.toHaveClass('flex', 'items-center', 'justify-center');
+    expect(screen.getByText('Non-centered content')).toBeInTheDocument();
   });
 
   test('renders with multiple children', () => {
@@ -56,7 +90,7 @@ describe('Container Component', () => {
         <h1>Title</h1>
         <p>Paragraph</p>
         <button>Button</button>
-      </Container>
+      </Container>,
     );
 
     expect(screen.getByText('Title')).toBeInTheDocument();
@@ -75,7 +109,7 @@ describe('Container Component', () => {
             <p>Main content</p>
           </main>
         </div>
-      </Container>
+      </Container>,
     );
 
     expect(screen.getByText('Header Title')).toBeInTheDocument();
@@ -85,7 +119,9 @@ describe('Container Component', () => {
   test('handles null and undefined children gracefully', () => {
     const { container } = render(<Container>{null}</Container>);
 
-    const containerDiv = container.querySelector('div');
+    // Testing container styling requires direct DOM access
+    // eslint-disable-next-line testing-library/no-node-access
+    const containerDiv = container.firstChild;
     expect(containerDiv).toBeInTheDocument();
     expect(containerDiv).toBeEmptyDOMElement();
   });
@@ -93,14 +129,16 @@ describe('Container Component', () => {
   test('applies all CSS classes correctly', () => {
     const { container } = render(<Container center={true} />);
 
-    const containerDiv = container.querySelector('div');
+    // Testing container styling requires direct DOM access
+    // eslint-disable-next-line testing-library/no-node-access
+    const containerDiv = container.firstChild;
     expect(containerDiv).toHaveClass(
       'flex',
       'items-center',
       'justify-center',
       'w-full',
       'min-h-full',
-      'bg-background'
+      'bg-background',
     );
   });
 });

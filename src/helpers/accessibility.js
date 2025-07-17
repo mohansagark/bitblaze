@@ -71,13 +71,9 @@ export const getFocusableElements = container => {
     '[tabindex]:not([tabindex^="-"])',
   ];
 
-  return Array.from(
-    container.querySelectorAll(focusableSelectors.join(', '))
-  ).filter(element => {
+  return Array.from(container.querySelectorAll(focusableSelectors.join(', '))).filter(element => {
     return (
-      element.offsetWidth > 0 ||
-      element.offsetHeight > 0 ||
-      element === document.activeElement
+      element.offsetWidth > 0 || element.offsetHeight > 0 || element === document.activeElement
     );
   });
 };
@@ -101,12 +97,10 @@ export const trapFocus = container => {
         lastElement.focus();
         e.preventDefault();
       }
-    } else {
+    } else if (document.activeElement === lastElement) {
       // Tab
-      if (document.activeElement === lastElement) {
-        firstElement.focus();
-        e.preventDefault();
-      }
+      firstElement.focus();
+      e.preventDefault();
     }
   };
 
@@ -209,7 +203,7 @@ export const meetsContrastRequirements = (
   foreground,
   background,
   level = 'AA',
-  size = 'normal'
+  size = 'normal',
 ) => {
   const ratio = getContrastRatio(foreground, background);
 
@@ -371,7 +365,7 @@ export const aria = {
   },
 };
 
-export default {
+const _accessibilityHelpers = {
   focusManager,
   getFocusableElements,
   trapFocus,

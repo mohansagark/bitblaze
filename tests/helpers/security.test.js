@@ -11,9 +11,7 @@ import {
 describe('Security Utilities', () => {
   describe('sanitizeHTML', () => {
     test('removes script tags', () => {
-      const result = sanitizeHTML(
-        '<script>alert("xss")</script><p>Safe content</p>'
-      );
+      const result = sanitizeHTML('<script>alert("xss")</script><p>Safe content</p>');
       expect(result).not.toContain('<script>');
       expect(result).toContain('Safe content');
     });
@@ -34,6 +32,7 @@ describe('Security Utilities', () => {
     });
 
     test('blocks dangerous URLs', () => {
+      // eslint-disable-next-line no-script-url
       expect(sanitizeURL('javascript:alert()')).toBe(null);
       expect(sanitizeURL('data:text/html,<script>alert()</script>')).toBe(null);
     });

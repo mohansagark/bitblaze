@@ -1,10 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useContext, useRef } from 'react';
-import {
-  setMenubar,
-  startConfetti,
-  stopConfetti,
-} from '../redux/slices/generalSlice';
+import { setMenubar, startConfetti, stopConfetti } from '../redux/slices/generalSlice';
 import { sidebarWidth as sbWidth, headerHeight, footerHeight } from './config';
 import { ThemeContext } from '../themes';
 
@@ -60,21 +56,31 @@ export const useAudio = () => {
         // Handle promise-based play() method
         if (playPromise !== undefined) {
           playPromise.catch(error => {
-            console.warn(`Audio play failed for ${id}:`, error);
+            if (process.env.NODE_ENV === 'development') {
+              // eslint-disable-next-line no-console
+              console.warn(`Audio play failed for ${id}:`, error);
+            }
           });
         }
-      } else {
+      } else if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
         console.warn(`Audio with id "${id}" not found. Did you register it?`);
       }
     } catch (error) {
-      console.error(`Error playing audio ${id}:`, error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(`Error playing audio ${id}:`, error);
+      }
     }
   };
 
   const registerAudio = (id = 'audio', variant = 'button') => {
     try {
       if (audioRefs.current[id]) {
-        console.warn(`Audio with id "${id}" already registered`);
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.warn(`Audio with id "${id}" already registered`);
+        }
         return;
       }
 
@@ -84,12 +90,18 @@ export const useAudio = () => {
 
       // Handle audio loading errors
       audioRef.addEventListener('error', e => {
-        console.error(`Failed to load audio file: /audio/${variant}.mp3`, e);
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.error(`Failed to load audio file: /audio/${variant}.mp3`, e);
+        }
       });
 
       audioRefs.current[id] = audioRef;
     } catch (error) {
-      console.error(`Error registering audio ${id}:`, error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(`Error registering audio ${id}:`, error);
+      }
     }
   };
 
@@ -101,7 +113,10 @@ export const useAudio = () => {
         audioRef.currentTime = 0;
       }
     } catch (error) {
-      console.error(`Error stopping audio ${id}:`, error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(`Error stopping audio ${id}:`, error);
+      }
     }
   };
 
@@ -112,7 +127,10 @@ export const useAudio = () => {
         audioRef.volume = Math.max(0, Math.min(1, volume));
       }
     } catch (error) {
-      console.error(`Error setting volume for audio ${id}:`, error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(`Error setting volume for audio ${id}:`, error);
+      }
     }
   };
 

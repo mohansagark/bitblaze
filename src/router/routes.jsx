@@ -1,10 +1,10 @@
-import WhatsAppChat from "../pages/Apps/WhatsAppChat";
-import Cards from "../pages/Games/Cards";
-import ChessBoard from "../pages/Games/ChessBoard";
-import RockPaperScissors from "../pages/Games/RockPaperScissors";
-import SnakesAndLadders from "../pages/Games/SnakesAndLadders";
-import Home from "../pages/Home";
-import { routePaths } from "./routeConstants";
+import WhatsAppChat from '../pages/Apps/WhatsAppChat';
+import Cards from '../pages/Games/Cards';
+import ChessBoard from '../pages/Games/ChessBoard';
+import RockPaperScissors from '../pages/Games/RockPaperScissors';
+import SnakesAndLadders from '../pages/Games/SnakesAndLadders';
+import Home from '../pages/Home';
+import { routePaths } from './routeConstants';
 
 const routes = [
   {

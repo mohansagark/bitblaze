@@ -7,3 +7,7 @@ dist
 .env.development
 coverage
 *.log
+package-lock.json
+yarn.lock
+public/manifest.json
+public/robots.txt

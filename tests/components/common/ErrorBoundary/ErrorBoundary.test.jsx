@@ -25,7 +25,7 @@ describe('ErrorBoundary Component', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={false} />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText('No error')).toBeInTheDocument();
@@ -35,14 +35,12 @@ describe('ErrorBoundary Component', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText('Something went wrong')).toBeInTheDocument();
     expect(
-      screen.getByText(
-        'An unexpected error occurred. Please try refreshing the page.'
-      )
+      screen.getByText('An unexpected error occurred. Please try refreshing the page.'),
     ).toBeInTheDocument();
   });
 
@@ -52,7 +50,7 @@ describe('ErrorBoundary Component', () => {
     render(
       <ErrorBoundary fallback={<CustomFallback />}>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText('Custom error message')).toBeInTheDocument();
@@ -64,7 +62,7 @@ describe('ErrorBoundary Component', () => {
     render(
       <ErrorBoundary onError={onError}>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     // Wait for the error to be handled
@@ -72,7 +70,7 @@ describe('ErrorBoundary Component', () => {
       expect.any(Error),
       expect.objectContaining({
         componentStack: expect.any(String),
-      })
+      }),
     );
   });
 
@@ -83,12 +81,10 @@ describe('ErrorBoundary Component', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
-    expect(
-      screen.getByText('Error Details (Development Only)')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Error Details (Development Only)')).toBeInTheDocument();
 
     process.env.NODE_ENV = originalEnv;
   });
@@ -106,7 +102,7 @@ describe('ErrorBoundary Component', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     const refreshButton = screen.getByText('Refresh Page');

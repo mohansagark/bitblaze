@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   FaDiceOne,
   FaDiceTwo,
@@ -6,23 +6,23 @@ import {
   FaDiceFour,
   FaDiceFive,
   FaDiceSix,
-} from "react-icons/fa";
-import { GiQueenCrown } from "react-icons/gi";
-import { RiCoinFill } from "react-icons/ri";
-import { useAudio, useConfetti } from "../../../helpers/hooks";
+} from 'react-icons/fa';
+import { GiQueenCrown } from 'react-icons/gi';
+import { RiCoinFill } from 'react-icons/ri';
+import { useAudio, useConfetti } from '../../../helpers/hooks';
 
 const SnakesAndLadders = () => {
   const { showConfetti } = useConfetti();
   const { playSound, registerAudio } = useAudio();
-  const id = { won: "won-audio", error: "error-audio", roll: "roll-audio" };
+  const id = { won: 'won-audio', error: 'error-audio', roll: 'roll-audio' };
   const grid = new Array(10).fill(new Array(10).fill(0));
   const [coinPos, setCoinPos] = useState(0);
   const [diceValue, setDiceValue] = useState(6);
 
   useEffect(() => {
-    registerAudio(id.won, "bell");
-    registerAudio(id.error, "error");
-    registerAudio(id.roll, "button");
+    registerAudio(id.won, 'bell');
+    registerAudio(id.error, 'error');
+    registerAudio(id.roll, 'button');
   }, [registerAudio, id.error, id.roll, id.won]);
 
   const diceView = {
@@ -57,27 +57,27 @@ const SnakesAndLadders = () => {
   };
 
   return (
-    <div className="text-center flex flex-col items-center justify-center">
-      <div className="flex flex-col-reverse mt-10">
+    <div className='text-center flex flex-col items-center justify-center'>
+      <div className='flex flex-col-reverse mt-10'>
         {grid.map((row, rIdx) => {
           return (
             <div
               className={`flex text-background-text ${
-                rIdx % 2 === 0 ? "flex-row" : "flex flex-row-reverse"
+                rIdx % 2 === 0 ? 'flex-row' : 'flex flex-row-reverse'
               }`}
               key={String(rIdx)}
             >
               {row.map((_col, cIdx) => {
                 return (
                   <div
-                    className="flex justify-center items-center w-12 h-12  border border-solid border-neutral600"
+                    className='flex justify-center items-center w-12 h-12  border border-solid border-neutral600'
                     key={String(cIdx)}
                   >
                     {rIdx * 10 + cIdx + 1 === coinPos ? (
                       rIdx * 10 + cIdx + 1 === 100 ? (
-                        <GiQueenCrown size={40} className="text-secondary" />
+                        <GiQueenCrown size={40} className='text-secondary' />
                       ) : (
-                        <RiCoinFill size={30} className="text-secondary" />
+                        <RiCoinFill size={30} className='text-secondary' />
                       )
                     ) : (
                       rIdx * 10 + cIdx + 1
@@ -90,8 +90,17 @@ const SnakesAndLadders = () => {
         })}
       </div>
       <div
-        className="flex items-center justify-center cursor-pointer w-[50px] h-[50px] rounded mt-[60px] bg-background text-secondary border-secondary"
+        className='flex items-center justify-center cursor-pointer w-[50px] h-[50px] rounded mt-[60px] bg-background text-secondary border-secondary'
         onClick={rollDice}
+        onKeyDown={e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            rollDice();
+          }
+        }}
+        role='button'
+        tabIndex={0}
+        aria-label='Roll dice'
       >
         {diceView[diceValue]}
       </div>

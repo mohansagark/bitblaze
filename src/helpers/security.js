@@ -44,8 +44,7 @@ export const sanitizeURL = url => {
  * @returns {string} Random token
  */
 export const generateToken = (length = 32) => {
-  const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -124,9 +123,7 @@ export class RateLimiter {
     const userRequests = this.requests.get(identifier) || [];
 
     // Remove old requests outside the window
-    const validRequests = userRequests.filter(
-      timestamp => now - timestamp < this.windowMs
-    );
+    const validRequests = userRequests.filter(timestamp => now - timestamp < this.windowMs);
 
     if (validRequests.length >= this.maxRequests) {
       return false;
@@ -145,9 +142,7 @@ export class RateLimiter {
   getRemainingRequests(identifier) {
     const now = Date.now();
     const userRequests = this.requests.get(identifier) || [];
-    const validRequests = userRequests.filter(
-      timestamp => now - timestamp < this.windowMs
-    );
+    const validRequests = userRequests.filter(timestamp => now - timestamp < this.windowMs);
 
     return Math.max(0, this.maxRequests - validRequests.length);
   }
@@ -184,7 +179,10 @@ export const secureStorage = {
 
       localStorage.setItem(key, stringValue);
     } catch (error) {
-      console.error('Error saving to localStorage:', error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error('Error saving to localStorage:', error);
+      }
     }
   },
 
@@ -207,7 +205,10 @@ export const secureStorage = {
 
       return JSON.parse(value);
     } catch (error) {
-      console.error('Error reading from localStorage:', error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error('Error reading from localStorage:', error);
+      }
       return null;
     }
   },
@@ -220,7 +221,10 @@ export const secureStorage = {
     try {
       localStorage.removeItem(key);
     } catch (error) {
-      console.error('Error removing from localStorage:', error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error('Error removing from localStorage:', error);
+      }
     }
   },
 
@@ -231,12 +235,15 @@ export const secureStorage = {
     try {
       localStorage.clear();
     } catch (error) {
-      console.error('Error clearing localStorage:', error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error('Error clearing localStorage:', error);
+      }
     }
   },
 };
 
-export default {
+const securityHelpers = {
   sanitizeHTML,
   sanitizeURL,
   generateToken,
@@ -247,3 +254,5 @@ export default {
   apiRateLimiter,
   secureStorage,
 };
+
+export default securityHelpers;

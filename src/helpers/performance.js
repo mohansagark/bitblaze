@@ -35,11 +35,10 @@ class PerformanceMonitor {
       this.recordMetric(componentName, 'renderTime', renderTime);
 
       if (renderTime > PERFORMANCE.SLOW_RENDER_THRESHOLD && isDevelopment()) {
-        console.warn(
-          `Slow render detected for ${componentName}: ${renderTime.toFixed(
-            2
-          )}ms`
-        );
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.warn(`Slow render detected for ${componentName}: ${renderTime.toFixed(2)}ms`);
+        }
       }
     };
   }
@@ -104,9 +103,10 @@ class PerformanceMonitor {
     };
 
     if (usage.used > PERFORMANCE.MEMORY_WARNING_THRESHOLD && isDevelopment()) {
-      console.warn(
-        `High memory usage detected: ${(usage.used / 1024 / 1024).toFixed(2)}MB`
-      );
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.warn(`High memory usage detected: ${(usage.used / 1024 / 1024).toFixed(2)}MB`);
+      }
     }
 
     return usage;
@@ -128,11 +128,7 @@ class PerformanceMonitor {
     // FID (First Input Delay)
     new PerformanceObserver(list => {
       list.getEntries().forEach(entry => {
-        this.recordMetric(
-          'webVitals',
-          'FID',
-          entry.processingStart - entry.startTime
-        );
+        this.recordMetric('webVitals', 'FID', entry.processingStart - entry.startTime);
       });
     }).observe({ entryTypes: ['first-input'] });
 
@@ -202,9 +198,7 @@ export const usePerformanceMonitor = componentName => {
  */
 export const withPerformanceMonitoring = (WrappedComponent, componentName) => {
   return function PerformanceMonitoredComponent(props) {
-    const endMeasurement = performanceMonitor.measureRender(
-      componentName || WrappedComponent.name
-    );
+    const endMeasurement = performanceMonitor.measureRender(componentName || WrappedComponent.name);
 
     React.useEffect(() => {
       endMeasurement();
@@ -243,7 +237,10 @@ export const initializePerformanceMonitoring = () => {
     if (isDevelopment()) {
       setInterval(() => {
         const report = performanceMonitor.generateReport();
-        console.log('Performance Report:', report);
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.log('Performance Report:', report);
+        }
       }, 30000);
     }
   }

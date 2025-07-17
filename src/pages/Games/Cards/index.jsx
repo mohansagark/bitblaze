@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Card from "./Card";
+import React, { useEffect, useState } from 'react';
+import Card from './Card';
 
 const Cards = () => {
   const [availableCards, setAvailableCards] = useState(
-    Array.from({ length: 52 }, (_, index) => index + 1)
+    Array.from({ length: 52 }, (_, index) => index + 1),
   );
   const [selectedCard, setSelectedCard] = useState(null);
   const radius = 250; // Adjust radius as needed
@@ -35,18 +35,18 @@ const Cards = () => {
   }, []);
 
   const [hover, setHover] = useState(null);
-  const hoverCard = (card) => {
+  const hoverCard = card => {
     if (card !== hover) {
       setHover(card);
     }
   };
 
-  const pickCard = (card) => {
+  const pickCard = card => {
     const remainingCards = availableCards.filter(
-      (c) => c.symbol !== card.symbol || c.number !== card.number
+      c => c.symbol !== card.symbol || c.number !== card.number,
     );
     const pickedCard = availableCards.find(
-      (c) => c.symbol === card.symbol && c.number === card.number
+      c => c.symbol === card.symbol && c.number === card.number,
     );
 
     setAvailableCards(remainingCards);
@@ -54,12 +54,12 @@ const Cards = () => {
   };
 
   return (
-    <div className="flex w-full min-h-full relative justify-center items-center">
+    <div className='flex w-full min-h-full relative justify-center items-center'>
       <div
-        className=" flex justify-center items-center absolute top-[50%] left-[53%]"
-        style={{ transform: "rotate(-85deg)" }}
+        className=' flex justify-center items-center absolute top-[50%] left-[53%]'
+        style={{ transform: 'rotate(-85deg)' }}
       >
-        <div className="deck relative">
+        <div className='deck relative'>
           {availableCards.map((card, index) => {
             const angle = startAngle + index * angleIncrement;
             const position = hover === index ? radius + 50 : radius;
@@ -68,7 +68,7 @@ const Cards = () => {
             return (
               <div
                 key={index}
-                className="min-w-24 min-h-36 bg-transparent absolute"
+                className='min-w-24 min-h-36 bg-transparent absolute'
                 style={{
                   left: cardX,
                   top: cardY,
@@ -80,7 +80,16 @@ const Cards = () => {
                   onMouseEnter={() => hoverCard(index)}
                   onMouseLeave={() => setHover(null)}
                   onClick={() => pickCard(card)}
-                  className="w-24 h-36 cursor-pointer hover:bg-primary flex items-center justify-center"
+                  onKeyDown={e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      pickCard(card);
+                    }
+                  }}
+                  role='button'
+                  tabIndex={0}
+                  aria-label={`Select card ${card}`}
+                  className='w-24 h-36 cursor-pointer hover:bg-primary flex items-center justify-center'
                   style={{
                     left: cardX,
                     top: cardY,
@@ -94,7 +103,7 @@ const Cards = () => {
           })}
         </div>
       </div>
-      <div className="w-24 h-36 cursor-pointer flex items-center justify-center">
+      <div className='w-24 h-36 cursor-pointer flex items-center justify-center'>
         <Card show={selectedCard} card={selectedCard} />
       </div>
     </div>

@@ -16,21 +16,17 @@ jest.mock('@mui/material/styles', () => ({
 jest.mock('@mui/material/FormGroup', () => {
   const mockReact = require('react');
   return function FormGroup({ children }) {
-    return mockReact.createElement(
-      'div',
-      { 'data-testid': 'form-group' },
-      children
-    );
+    return mockReact.createElement('div', { 'data-testid': 'form-group' }, children);
   };
 });
 
 jest.mock('@mui/material/FormControlLabel', () => {
   const mockReact = require('react');
-  return function FormControlLabel({ control, checked, onChange, ...props }) {
+  return function FormControlLabel({ control, checked, onChange, ..._props }) {
     return mockReact.createElement(
       'label',
       { 'data-testid': 'form-control-label' },
-      mockReact.cloneElement(control, { checked, onChange })
+      mockReact.cloneElement(control, { checked, onChange }),
     );
   };
 });
@@ -46,14 +42,9 @@ jest.mock('@mui/material', () => {
         'data-testid': 'mui-switch',
         ...props,
       }),
-    Stack: ({ children }) =>
-      mockReact.createElement('div', { 'data-testid': 'stack' }, children),
+    Stack: ({ children }) => mockReact.createElement('div', { 'data-testid': 'stack' }, children),
     Typography: ({ children, className }) =>
-      mockReact.createElement(
-        'span',
-        { 'data-testid': 'typography', className },
-        children
-      ),
+      mockReact.createElement('span', { 'data-testid': 'typography', className }, children),
   };
 });
 
@@ -145,9 +136,7 @@ describe('Switch Component', () => {
     const mockSetChecked = jest.fn();
     const user = userEvent.setup();
 
-    const { unmount } = render(
-      <Switch checked={false} setChecked={mockSetChecked} />
-    );
+    const { unmount } = render(<Switch checked={false} setChecked={mockSetChecked} />);
 
     const switchElement = screen.getByTestId('mui-switch');
 

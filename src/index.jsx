@@ -33,5 +33,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <SpeedInsights />
       </HelmetProvider>
     </ErrorBoundary>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

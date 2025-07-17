@@ -33,13 +33,13 @@ const Button = ({
     backgroundColor: disabled
       ? 'var(--color-neutral-400)'
       : isPrimary
-      ? 'var(--color-primary)'
-      : 'transparent',
+        ? 'var(--color-primary)'
+        : 'transparent',
     color: disabled
       ? 'var(--color-neutral-100)'
       : isPrimary
-      ? 'var(--color-primary-text)'
-      : 'var(--color-primary)',
+        ? 'var(--color-primary-text)'
+        : 'var(--color-primary)',
     border: isPrimary ? 'none' : '1px solid var(--color-primary)',
     borderRadius: borderRadius || '0.5rem',
     cursor: disabled ? 'not-allowed' : 'pointer',

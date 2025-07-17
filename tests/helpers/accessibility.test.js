@@ -20,8 +20,8 @@ global.document.createElement = jest.fn(() => ({
 }));
 
 // Mock body methods without overriding the body itself
-const originalAppendChild = global.document.body.appendChild;
-const originalRemoveChild = global.document.body.removeChild;
+const _originalAppendChild = global.document.body.appendChild;
+const _originalRemoveChild = global.document.body.removeChild;
 
 global.document.body.appendChild = jest.fn();
 global.document.body.removeChild = jest.fn();
@@ -109,14 +109,8 @@ describe('Accessibility Utilities', () => {
       announceToScreenReader('Test message');
 
       expect(global.document.createElement).toHaveBeenCalledWith('div');
-      expect(mockElement.setAttribute).toHaveBeenCalledWith(
-        'aria-live',
-        'polite'
-      );
-      expect(mockElement.setAttribute).toHaveBeenCalledWith(
-        'aria-atomic',
-        'true'
-      );
+      expect(mockElement.setAttribute).toHaveBeenCalledWith('aria-live', 'polite');
+      expect(mockElement.setAttribute).toHaveBeenCalledWith('aria-atomic', 'true');
       expect(mockElement.textContent).toBe('Test message');
     });
   });
@@ -147,15 +141,11 @@ describe('Accessibility Utilities', () => {
 
   describe('meetsContrastRequirements', () => {
     test('validates high contrast combinations', () => {
-      expect(
-        meetsContrastRequirements('#000000', '#ffffff', 'AA', 'normal')
-      ).toBe(true);
+      expect(meetsContrastRequirements('#000000', '#ffffff', 'AA', 'normal')).toBe(true);
     });
 
     test('rejects low contrast combinations', () => {
-      expect(
-        meetsContrastRequirements('#cccccc', '#ffffff', 'AA', 'normal')
-      ).toBe(false);
+      expect(meetsContrastRequirements('#cccccc', '#ffffff', 'AA', 'normal')).toBe(false);
     });
   });
 
@@ -165,30 +155,21 @@ describe('Accessibility Utilities', () => {
       aria.setAttributes(element, { label: 'Test', expanded: 'true' });
 
       expect(element.setAttribute).toHaveBeenCalledWith('aria-label', 'Test');
-      expect(element.setAttribute).toHaveBeenCalledWith(
-        'aria-expanded',
-        'true'
-      );
+      expect(element.setAttribute).toHaveBeenCalledWith('aria-expanded', 'true');
     });
 
     test('toggleExpanded sets expanded state', () => {
       const element = { setAttribute: jest.fn() };
       aria.toggleExpanded(element, true);
 
-      expect(element.setAttribute).toHaveBeenCalledWith(
-        'aria-expanded',
-        'true'
-      );
+      expect(element.setAttribute).toHaveBeenCalledWith('aria-expanded', 'true');
     });
 
     test('setSelected sets selected state', () => {
       const element = { setAttribute: jest.fn() };
       aria.setSelected(element, true);
 
-      expect(element.setAttribute).toHaveBeenCalledWith(
-        'aria-selected',
-        'true'
-      );
+      expect(element.setAttribute).toHaveBeenCalledWith('aria-selected', 'true');
     });
 
     test('setDisabled sets disabled state', () => {
@@ -199,10 +180,7 @@ describe('Accessibility Utilities', () => {
       };
 
       aria.setDisabled(element, true);
-      expect(element.setAttribute).toHaveBeenCalledWith(
-        'aria-disabled',
-        'true'
-      );
+      expect(element.setAttribute).toHaveBeenCalledWith('aria-disabled', 'true');
       expect(element.setAttribute).toHaveBeenCalledWith('tabindex', '-1');
     });
   });

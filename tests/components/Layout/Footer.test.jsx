@@ -116,8 +116,9 @@ describe('Footer Component', () => {
     });
 
     test('does not require any props', () => {
-      const { container } = render(<Footer />);
-      expect(container.firstChild).toBeInTheDocument();
+      render(<Footer />);
+      const footer = screen.getByRole('contentinfo');
+      expect(footer).toBeInTheDocument();
     });
   });
 
@@ -126,12 +127,7 @@ describe('Footer Component', () => {
       render(<Footer />);
 
       const footer = screen.getByRole('contentinfo');
-      const expectedClasses = [
-        'bg-background',
-        'p-5',
-        'pr-20',
-        'text-typography',
-      ];
+      const expectedClasses = ['bg-background', 'p-5', 'pr-20', 'text-typography'];
 
       expectedClasses.forEach(className => {
         expect(footer).toHaveClass(className);

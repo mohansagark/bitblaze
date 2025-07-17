@@ -38,7 +38,25 @@
     "test:coverage": "jest --coverage --config=jest.config.js",
     "test:react-scripts": "react-scripts test --coverage --watchAll=false",
     "test:ci": "react-scripts test --coverage --ci --reporters=default --reporters=jest-junit --coverageReporters=text --coverageReporters=lcov --coverageReporters=html",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/ tests/ --ext .js,.jsx",
+    "lint:fix": "eslint src/ tests/ --ext .js,.jsx --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css,scss,md}\" \"tests/**/*.{js,jsx}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,json,css,scss,md}\" \"tests/**/*.{js,jsx}\"",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "tests/**/*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "jest": {
     "moduleNameMapper": {
@@ -127,6 +145,15 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "babel-jest": "^30.0.4",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.2",
     "tailwindcss": "^3.4.1"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"

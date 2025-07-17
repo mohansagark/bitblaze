@@ -42,9 +42,7 @@ export const isDebugEnabled = () => {
  * @returns {boolean} True if feature is enabled
  */
 export const isFeatureEnabled = feature => {
-  return (
-    getEnvVar(`REACT_APP_ENABLE_${feature.toUpperCase()}`, 'false') === 'true'
-  );
+  return getEnvVar(`REACT_APP_ENABLE_${feature.toUpperCase()}`, 'false') === 'true';
 };
 
 /**
@@ -93,14 +91,17 @@ export const validateEnvironment = () => {
  */
 export const logEnvironmentConfig = () => {
   if (isDevelopment() && isDebugEnabled()) {
-    console.log('Environment Configuration:', {
-      environment: getEnvVar('REACT_APP_ENV'),
-      debug: isDebugEnabled(),
-      features: {
-        confetti: isFeatureEnabled('confetti'),
-        sound: isFeatureEnabled('sound'),
-        analytics: isFeatureEnabled('analytics'),
-      },
-    });
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.log('Environment Configuration:', {
+        environment: getEnvVar('REACT_APP_ENV'),
+        debug: isDebugEnabled(),
+        features: {
+          confetti: isFeatureEnabled('confetti'),
+          sound: isFeatureEnabled('sound'),
+          analytics: isFeatureEnabled('analytics'),
+        },
+      });
+    }
   }
 };

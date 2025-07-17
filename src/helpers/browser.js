@@ -26,8 +26,7 @@ export const getBrowserInfo = () => {
     opera: /Opera|OPR/.test(userAgent),
   };
 
-  const browserName =
-    Object.keys(browsers).find(key => browsers[key]) || 'unknown';
+  const browserName = Object.keys(browsers).find(key => browsers[key]) || 'unknown';
 
   // Extract version
   let version = 'unknown';
@@ -94,8 +93,7 @@ export const features = {
   /**
    * Check if Service Workers are supported
    */
-  serviceWorkers:
-    typeof navigator !== 'undefined' && 'serviceWorker' in navigator,
+  serviceWorkers: typeof navigator !== 'undefined' && 'serviceWorker' in navigator,
 
   /**
    * Check if Push API is supported
@@ -126,9 +124,7 @@ export const features = {
     if (typeof document === 'undefined') return false;
     try {
       const canvas = document.createElement('canvas');
-      return !!(
-        canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-      );
+      return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
     } catch (e) {
       return false;
     }
@@ -143,8 +139,7 @@ export const features = {
    * Check if Web Audio API is supported
    */
   webAudio:
-    typeof window !== 'undefined' &&
-    ('AudioContext' in window || 'webkitAudioContext' in window),
+    typeof window !== 'undefined' && ('AudioContext' in window || 'webkitAudioContext' in window),
 
   /**
    * Check if Canvas is supported
@@ -162,16 +157,12 @@ export const features = {
   /**
    * Check if CSS Grid is supported
    */
-  cssGrid:
-    typeof document !== 'undefined' &&
-    'grid' in document.createElement('div').style,
+  cssGrid: typeof document !== 'undefined' && 'grid' in document.createElement('div').style,
 
   /**
    * Check if CSS Flexbox is supported
    */
-  flexbox:
-    typeof document !== 'undefined' &&
-    'flex' in document.createElement('div').style,
+  flexbox: typeof document !== 'undefined' && 'flex' in document.createElement('div').style,
 
   /**
    * Check if CSS Custom Properties (variables) are supported
@@ -185,8 +176,7 @@ export const features = {
   /**
    * Check if Intersection Observer is supported
    */
-  intersectionObserver:
-    typeof window !== 'undefined' && 'IntersectionObserver' in window,
+  intersectionObserver: typeof window !== 'undefined' && 'IntersectionObserver' in window,
 
   /**
    * Check if ResizeObserver is supported
@@ -214,9 +204,7 @@ export const features = {
   /**
    * Check if ES6 modules are supported
    */
-  es6Modules:
-    typeof document !== 'undefined' &&
-    'noModule' in document.createElement('script'),
+  es6Modules: typeof document !== 'undefined' && 'noModule' in document.createElement('script'),
 
   /**
    * Check if Passive event listeners are supported
@@ -249,38 +237,30 @@ export const device = {
    */
   isMobile:
     typeof navigator !== 'undefined' &&
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ),
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
 
   /**
    * Check if device is tablet
    */
   isTablet:
-    typeof navigator !== 'undefined' &&
-    /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent),
+    typeof navigator !== 'undefined' && /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent),
 
   /**
    * Check if device is desktop
    */
   isDesktop:
     typeof navigator !== 'undefined' &&
-    !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ),
+    !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
 
   /**
    * Check if device is iOS
    */
-  isIOS:
-    typeof navigator !== 'undefined' &&
-    /iPad|iPhone|iPod/.test(navigator.userAgent),
+  isIOS: typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent),
 
   /**
    * Check if device is Android
    */
-  isAndroid:
-    typeof navigator !== 'undefined' && /Android/.test(navigator.userAgent),
+  isAndroid: typeof navigator !== 'undefined' && /Android/.test(navigator.userAgent),
 
   /**
    * Get device pixel ratio
@@ -290,9 +270,7 @@ export const device = {
   /**
    * Check if device supports hover
    */
-  canHover:
-    typeof window !== 'undefined' &&
-    window.matchMedia('(hover: hover)').matches,
+  canHover: typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches,
 
   /**
    * Get screen size category
@@ -378,12 +356,7 @@ export const polyfills = {
       function CustomEvent(event, params) {
         params = params || { bubbles: false, cancelable: false, detail: null };
         const evt = document.createEvent('CustomEvent');
-        evt.initCustomEvent(
-          event,
-          params.bubbles,
-          params.cancelable,
-          params.detail
-        );
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
         return evt;
       }
       window.CustomEvent = CustomEvent;
@@ -457,8 +430,7 @@ export const performance = {
    */
   prefersReducedMotion: () => {
     return (
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
     );
   },
 };
@@ -477,7 +449,10 @@ export const safeFeatures = {
           localStorage.setItem(key, value);
           return true;
         } catch (e) {
-          console.warn('localStorage.setItem failed:', e);
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.warn('localStorage.setItem failed:', e);
+          }
         }
       }
       return false;
@@ -488,7 +463,10 @@ export const safeFeatures = {
         try {
           return localStorage.getItem(key);
         } catch (e) {
-          console.warn('localStorage.getItem failed:', e);
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.warn('localStorage.getItem failed:', e);
+          }
         }
       }
       return null;
@@ -500,7 +478,10 @@ export const safeFeatures = {
           localStorage.removeItem(key);
           return true;
         } catch (e) {
-          console.warn('localStorage.removeItem failed:', e);
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.warn('localStorage.removeItem failed:', e);
+          }
         }
       }
       return false;
@@ -516,7 +497,10 @@ export const safeFeatures = {
         await navigator.clipboard.writeText(text);
         return true;
       } catch (e) {
-        console.warn('Clipboard API failed:', e);
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.warn('Clipboard API failed:', e);
+        }
       }
     }
 
@@ -534,7 +518,10 @@ export const safeFeatures = {
       document.body.removeChild(textArea);
       return result;
     } catch (e) {
-      console.warn('Copy fallback failed:', e);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.warn('Copy fallback failed:', e);
+      }
       return false;
     }
   },
@@ -544,7 +531,10 @@ export const safeFeatures = {
    */
   showNotification: (title, options = {}) => {
     if (!features.notifications) {
-      console.warn('Notifications not supported');
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.warn('Notifications not supported');
+      }
       return null;
     }
 
@@ -561,7 +551,7 @@ export const safeFeatures = {
   },
 };
 
-export default {
+const browserHelpers = {
   getBrowserInfo,
   features,
   device,
@@ -569,3 +559,5 @@ export default {
   performance,
   safeFeatures,
 };
+
+export default browserHelpers;

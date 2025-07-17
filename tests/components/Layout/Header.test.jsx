@@ -14,32 +14,25 @@ describe('Header Component', () => {
     const [menuOpen, setMenuOpen] = React.useState(false);
 
     return (
-      <div data-testid="header" className="bg-background">
-        <div data-testid="container">
-          <div data-testid="toolbar">
-            <div data-testid="menu-section">
-              <button data-testid="menu-button">Menu</button>
+      <div data-testid='header' className='bg-background'>
+        <div data-testid='container'>
+          <div data-testid='toolbar'>
+            <div data-testid='menu-section'>
+              <button data-testid='menu-button'>Menu</button>
             </div>
             {showLogo && (
-              <div data-testid="logo-section">
-                <div data-testid="logo">Logo</div>
+              <div data-testid='logo-section'>
+                <div data-testid='logo'>Logo</div>
               </div>
             )}
-            <div data-testid="user-section">
-              <div data-testid="tooltip" title="My Profile">
-                <button
-                  data-testid="avatar-button"
-                  onClick={() => setMenuOpen(!menuOpen)}
-                >
-                  <img
-                    data-testid="avatar"
-                    alt="Mohansagar"
-                    src="/static/images/avatar/2.jpg"
-                  />
+            <div data-testid='user-section'>
+              <div data-testid='tooltip' title='My Profile'>
+                <button data-testid='avatar-button' onClick={() => setMenuOpen(!menuOpen)}>
+                  <img data-testid='avatar' alt='Mohansagar' src='/static/images/avatar/2.jpg' />
                 </button>
               </div>
               {menuOpen && (
-                <div data-testid="user-menu">
+                <div data-testid='user-menu'>
                   <button onClick={() => setMenuOpen(false)}>Close Menu</button>
                   <div>User Profile</div>
                 </div>

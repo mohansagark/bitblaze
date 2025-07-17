@@ -7,10 +7,6 @@ import {
   isDevelopment,
   isProduction,
   isDebugEnabled,
-  isFeatureEnabled,
-  getApiUrl,
-  getAppVersion,
-  getBuildInfo,
 } from '../../src/helpers/environment';
 
 describe('Environment Helper Functions', () => {

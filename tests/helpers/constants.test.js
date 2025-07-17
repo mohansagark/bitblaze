@@ -2,19 +2,7 @@
  * Tests for constants
  */
 
-import {
-  GAME_STATES,
-  GAME_TYPES,
-  AUDIO_FILES,
-  CHESS_PIECES,
-  PLAYER_COLORS,
-  NOTIFICATION_TYPES,
-  ERROR_TYPES,
-  STORAGE_KEYS,
-  API_ENDPOINTS,
-  VALIDATION_PATTERNS,
-  UI_CONSTANTS,
-} from '../../src/helpers/constants';
+import { GAME_STATES, GAME_TYPES, AUDIO_FILES } from '../../src/helpers/constants';
 
 describe('Constants', () => {
   describe('GAME_STATES', () => {

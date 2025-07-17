@@ -1,8 +1,6 @@
 import {
   isValidEmail,
   validatePassword,
-  validateUsername,
-  validateRequiredFields,
   sanitizeInput,
   isEmpty,
 } from '../../src/helpers/validation';
@@ -50,9 +48,7 @@ describe('Validation Utilities', () => {
       const result = validatePassword('weak');
       expect(result.isValid).toBe(false);
       expect(result.strength).toBeLessThan(5);
-      expect(result.errors).toContain(
-        'Password must be at least 8 characters long'
-      );
+      expect(result.errors).toContain('Password must be at least 8 characters long');
     });
   });
 

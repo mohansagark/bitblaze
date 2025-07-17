@@ -57,7 +57,7 @@ export const generalSlice = createSlice({
     },
     removeNotification: (state, action) => {
       state.notifications = state.notifications.filter(
-        notification => notification.id !== action.payload
+        notification => notification.id !== action.payload,
       );
     },
     addError: (state, action) => {

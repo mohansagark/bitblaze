@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const HoroscopeMatch = () => {
   useEffect(() => {
-    var api = "match_horoscope";
-    var userId = "629354";
-    var apiKey = "64481946d894352d6af90763fcf829e5fb65b33b";
-    var data = {
+    const api = 'match_horoscope';
+    const userId = '629354';
+    const apiKey = '64481946d894352d6af90763fcf829e5fb65b33b';
+    const data = {
       m_day: 6,
       m_month: 1,
       m_year: 2000,
@@ -24,27 +24,33 @@ const HoroscopeMatch = () => {
       f_tzone: 5.5,
     };
 
-    var auth = "Basic " + btoa(userId + ":" + apiKey);
+    const auth = `Basic ${btoa(`${userId}:${apiKey}`)}`;
 
-    fetch("https://json.astrologyapi.com/v1/" + api, {
-      method: "POST",
+    fetch(`https://json.astrologyapi.com/v1/${api}`, {
+      method: 'POST',
       headers: {
         Authorization: auth,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-      .then((response) => {
+      .then(response => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
+      .then(data => {
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.log(data);
+        }
       })
-      .catch((error) => {
-        console.error("There was a problem with your fetch operation:", error);
+      .catch(error => {
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.error('There was a problem with your fetch operation:', error);
+        }
       });
   }, []);
   return <div>HoroscopeMatch</div>;

@@ -4,7 +4,6 @@ import generalSlice, {
   stopLoader,
   setMobile,
   setMenubar,
-  setConfetti,
   startConfetti,
   stopConfetti,
   addNotification,
@@ -104,7 +103,7 @@ describe('generalSlice', () => {
         id: '1',
         type: 'success',
         message: 'Test message',
-      })
+      }),
     );
   });
 

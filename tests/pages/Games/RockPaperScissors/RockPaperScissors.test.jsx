@@ -25,9 +25,7 @@ describe('RockPaperScissors Game', () => {
     expect(screen.getByText(/Rock, Paper, Scissors/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /rock/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /paper/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: /scissors/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /scissors/i })).toBeInTheDocument();
   });
 
   test('allows player to make a choice', () => {

@@ -101,9 +101,7 @@ export const validateUsername = username => {
   }
 
   if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-    result.errors.push(
-      'Username can only contain letters, numbers, and underscores'
-    );
+    result.errors.push('Username can only contain letters, numbers, and underscores');
   }
 
   result.isValid = result.errors.length === 0;
@@ -169,7 +167,7 @@ export const validateGameMove = (move, gameState, isValidMove) => {
  * @param {object} gameState - Current chess game state
  * @returns {object} Validation result
  */
-export const validateChessMove = (move, gameState) => {
+export const validateChessMove = (move, _gameState) => {
   const result = {
     isValid: false,
     error: null,
@@ -255,9 +253,7 @@ export const validateFileUpload = (file, options = {}) => {
   }
 
   if (file.size > maxSize) {
-    result.errors.push(
-      `File size must be less than ${maxSize / 1024 / 1024}MB`
-    );
+    result.errors.push(`File size must be less than ${maxSize / 1024 / 1024}MB`);
   }
 
   if (!allowedTypes.includes(file.type)) {
@@ -268,7 +264,7 @@ export const validateFileUpload = (file, options = {}) => {
   return result;
 };
 
-export default {
+const validationHelpers = {
   isEmpty,
   isValidEmail,
   validatePassword,
@@ -280,3 +276,5 @@ export default {
   sanitizeInput,
   validateFileUpload,
 };
+
+export default validationHelpers;

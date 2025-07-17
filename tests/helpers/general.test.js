@@ -60,10 +60,7 @@ describe('General Helper Functions', () => {
     test('stores data in sessionStorage when key and value are provided', () => {
       const result = persistData('test-key', 'test-value');
 
-      expect(mockSessionStorage.setItem).toHaveBeenCalledWith(
-        'test-key',
-        'test-value'
-      );
+      expect(mockSessionStorage.setItem).toHaveBeenCalledWith('test-key', 'test-value');
       expect(result).toBeNull();
     });
 
@@ -94,10 +91,7 @@ describe('General Helper Functions', () => {
       changeTheme('dark');
 
       expect(document.querySelector).toHaveBeenCalledWith('html');
-      expect(mockHtmlElement.setAttribute).toHaveBeenCalledWith(
-        'data-theme',
-        'dark'
-      );
+      expect(mockHtmlElement.setAttribute).toHaveBeenCalledWith('data-theme', 'dark');
     });
 
     test('handles case when html element is not found', () => {
@@ -118,10 +112,7 @@ describe('General Helper Functions', () => {
       changePrimaryColor('blue');
 
       expect(document.querySelector).toHaveBeenCalledWith('html');
-      expect(mockHtmlElement.setAttribute).toHaveBeenCalledWith(
-        'primary-color',
-        'blue'
-      );
+      expect(mockHtmlElement.setAttribute).toHaveBeenCalledWith('primary-color', 'blue');
     });
 
     test('handles case when html element is not found', () => {
@@ -136,9 +127,7 @@ describe('General Helper Functions', () => {
     test('capitalizes first letter of each word', () => {
       expect(capitalizeFirstLetter('hello world')).toBe('Hello World');
       expect(capitalizeFirstLetter('test')).toBe('Test');
-      expect(capitalizeFirstLetter('multiple word string')).toBe(
-        'Multiple Word String'
-      );
+      expect(capitalizeFirstLetter('multiple word string')).toBe('Multiple Word String');
     });
 
     test('handles single character strings', () => {

@@ -20,7 +20,7 @@ const Input = ({
         sx: { color: 'inherit' },
       }}
       className={`input-field focus:border-primary ${className}`}
-      variant="outlined"
+      variant='outlined'
       label={label}
       fullWidth
       type={type}

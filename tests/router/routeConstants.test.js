@@ -102,7 +102,7 @@ describe('Route Constants', () => {
       const originalPaths = { ...routePaths };
 
       // Attempt to modify (this should not affect the original)
-      const modifiedPaths = { ...routePaths, newRoute: '/new-route' };
+      const _modifiedPaths = { ...routePaths, newRoute: '/new-route' };
 
       expect(routePaths).toEqual(originalPaths);
       expect(routePaths).not.toHaveProperty('newRoute');
