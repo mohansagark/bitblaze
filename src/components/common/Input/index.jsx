@@ -11,13 +11,15 @@ const Input = ({
   maxLength,
   error = false,
   helperText = '',
+  disabled = false,
+  className = '',
 }) => {
   return (
     <TextField
       InputProps={{
         sx: { color: 'inherit' },
       }}
-      className="input-field focus:border-primary"
+      className={`input-field focus:border-primary ${className}`}
       variant="outlined"
       label={label}
       fullWidth
@@ -28,6 +30,7 @@ const Input = ({
       inputProps={{ maxLength }}
       error={error}
       helperText={helperText}
+      disabled={disabled}
     />
   );
 };
@@ -41,6 +44,8 @@ Input.propTypes = {
   maxLength: PropTypes.number,
   error: PropTypes.bool,
   helperText: PropTypes.string,
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -52,6 +57,8 @@ Input.defaultProps = {
   maxLength: undefined,
   error: false,
   helperText: '',
+  disabled: false,
+  className: '',
 };
 
 export default Input;

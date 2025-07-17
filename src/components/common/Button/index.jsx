@@ -13,6 +13,7 @@ const Button = ({
   sound = false,
   disabled = false,
   variant = 'primary', // "primary" or "secondary"
+  type = 'button',
 }) => {
   const { playSound, registerAudio } = useAudio();
 
@@ -48,7 +49,7 @@ const Button = ({
   return (
     <button
       id={id}
-      type="button"
+      type={type}
       onClick={onPress}
       disabled={disabled}
       style={baseStyles}
@@ -72,6 +73,7 @@ Button.propTypes = {
   sound: PropTypes.bool,
   disabled: PropTypes.bool,
   variant: PropTypes.oneOf(['primary', 'secondary']),
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
 };
 
 Button.defaultProps = {
@@ -85,6 +87,7 @@ Button.defaultProps = {
   sound: false,
   disabled: false,
   variant: 'primary',
+  type: 'button',
 };
 
 export default Button;

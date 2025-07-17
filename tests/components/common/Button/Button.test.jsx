@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from '../../../redux/store';
-import Button from './index';
+import { store } from '../../../../src/redux/store';
+import Button from '../../../../src/components/common/Button';
 
 const renderWithProvider = component => {
   return render(<Provider store={store}>{component}</Provider>);
@@ -47,5 +47,12 @@ describe('Button Component', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveStyle({ backgroundColor: 'transparent' });
+  });
+
+  test('handles different button types', () => {
+    renderWithProvider(<Button text="Submit" type="submit" />);
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('type', 'submit');
   });
 });

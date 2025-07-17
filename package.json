@@ -35,7 +35,71 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "jest --coverage --config=jest.config.js",
+    "test:react-scripts": "react-scripts test --coverage --watchAll=false",
+    "test:ci": "react-scripts test --coverage --ci --reporters=default --reporters=jest-junit --coverageReporters=text --coverageReporters=lcov --coverageReporters=html",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/src/__mocks__/fileMock.js"
+    },
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": [
+        "babel-jest",
+        {
+          "presets": [
+            [
+              "@babel/preset-env",
+              {
+                "targets": {
+                  "node": "current"
+                }
+              }
+            ],
+            [
+              "@babel/preset-react",
+              {
+                "runtime": "automatic"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-redux|@reduxjs/toolkit)/)"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/index.jsx",
+      "!src/serviceWorker.js",
+      "!src/setupTests.js",
+      "!src/**/*.test.{js,jsx}",
+      "!src/**/*.stories.{js,jsx}",
+      "!src/reportWebVitals.js"
+    ],
+    "testMatch": [
+      "<rootDir>/tests/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx}",
+      "<rootDir>/src/**/*.{test,spec}.{js,jsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 60,
+        "functions": 60,
+        "lines": 60,
+        "statements": 60
+      }
+    },
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html",
+      "json-summary"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -56,10 +120,13 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
+    "babel-jest": "^30.0.4",
     "tailwindcss": "^3.4.1"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"

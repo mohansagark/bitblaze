@@ -7,6 +7,15 @@
  * @returns {Object} Browser information
  */
 export const getBrowserInfo = () => {
+  if (typeof navigator === 'undefined') {
+    return {
+      name: 'unknown',
+      version: 'unknown',
+      userAgent: '',
+      isModern: true,
+    };
+  }
+
   const userAgent = navigator.userAgent;
   const browsers = {
     chrome: /Chrome/.test(userAgent) && /Google Inc/.test(navigator.vendor),
@@ -75,7 +84,7 @@ export const features = {
   /**
    * Check if IndexedDB is available
    */
-  indexedDB: 'indexedDB' in window,
+  indexedDB: typeof window !== 'undefined' && 'indexedDB' in window,
 
   /**
    * Check if Web Workers are supported
@@ -85,32 +94,36 @@ export const features = {
   /**
    * Check if Service Workers are supported
    */
-  serviceWorkers: 'serviceWorker' in navigator,
+  serviceWorkers:
+    typeof navigator !== 'undefined' && 'serviceWorker' in navigator,
 
   /**
    * Check if Push API is supported
    */
-  pushNotifications: 'PushManager' in window,
+  pushNotifications: typeof window !== 'undefined' && 'PushManager' in window,
 
   /**
    * Check if Notifications API is supported
    */
-  notifications: 'Notification' in window,
+  notifications: typeof window !== 'undefined' && 'Notification' in window,
 
   /**
    * Check if Geolocation API is supported
    */
-  geolocation: 'geolocation' in navigator,
+  geolocation: typeof navigator !== 'undefined' && 'geolocation' in navigator,
 
   /**
    * Check if Touch events are supported
    */
-  touch: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+  touch:
+    typeof window !== 'undefined' &&
+    ('ontouchstart' in window || (navigator && navigator.maxTouchPoints > 0)),
 
   /**
    * Check if WebGL is supported
    */
   webgl: (() => {
+    if (typeof document === 'undefined') return false;
     try {
       const canvas = document.createElement('canvas');
       return !!(
@@ -124,17 +137,20 @@ export const features = {
   /**
    * Check if WebRTC is supported
    */
-  webRTC: 'RTCPeerConnection' in window,
+  webRTC: typeof window !== 'undefined' && 'RTCPeerConnection' in window,
 
   /**
    * Check if Web Audio API is supported
    */
-  webAudio: 'AudioContext' in window || 'webkitAudioContext' in window,
+  webAudio:
+    typeof window !== 'undefined' &&
+    ('AudioContext' in window || 'webkitAudioContext' in window),
 
   /**
    * Check if Canvas is supported
    */
   canvas: (() => {
+    if (typeof document === 'undefined') return false;
     try {
       const canvas = document.createElement('canvas');
       return !!(canvas.getContext && canvas.getContext('2d'));
@@ -146,17 +162,22 @@ export const features = {
   /**
    * Check if CSS Grid is supported
    */
-  cssGrid: 'grid' in document.createElement('div').style,
+  cssGrid:
+    typeof document !== 'undefined' &&
+    'grid' in document.createElement('div').style,
 
   /**
    * Check if CSS Flexbox is supported
    */
-  flexbox: 'flex' in document.createElement('div').style,
+  flexbox:
+    typeof document !== 'undefined' &&
+    'flex' in document.createElement('div').style,
 
   /**
    * Check if CSS Custom Properties (variables) are supported
    */
   cssVariables:
+    typeof window !== 'undefined' &&
     window.CSS &&
     window.CSS.supports &&
     window.CSS.supports('color', 'var(--fake-var)'),
@@ -164,23 +185,27 @@ export const features = {
   /**
    * Check if Intersection Observer is supported
    */
-  intersectionObserver: 'IntersectionObserver' in window,
+  intersectionObserver:
+    typeof window !== 'undefined' && 'IntersectionObserver' in window,
 
   /**
    * Check if ResizeObserver is supported
    */
-  resizeObserver: 'ResizeObserver' in window,
+  resizeObserver: typeof window !== 'undefined' && 'ResizeObserver' in window,
 
   /**
    * Check if Clipboard API is supported
    */
   clipboard:
-    navigator.clipboard && typeof navigator.clipboard.writeText === 'function',
+    typeof navigator !== 'undefined' &&
+    navigator.clipboard &&
+    typeof navigator.clipboard.writeText === 'function',
 
   /**
    * Check if File API is supported
    */
   fileAPI:
+    typeof window !== 'undefined' &&
     'File' in window &&
     'FileReader' in window &&
     'FileList' in window &&
@@ -189,12 +214,15 @@ export const features = {
   /**
    * Check if ES6 modules are supported
    */
-  es6Modules: 'noModule' in document.createElement('script'),
+  es6Modules:
+    typeof document !== 'undefined' &&
+    'noModule' in document.createElement('script'),
 
   /**
    * Check if Passive event listeners are supported
    */
   passiveEvents: (() => {
+    if (typeof window === 'undefined') return false;
     let supportsPassive = false;
     try {
       const options = Object.defineProperty({}, 'passive', {
@@ -220,6 +248,7 @@ export const device = {
    * Check if device is mobile
    */
   isMobile:
+    typeof navigator !== 'undefined' &&
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     ),
@@ -227,12 +256,15 @@ export const device = {
   /**
    * Check if device is tablet
    */
-  isTablet: /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent),
+  isTablet:
+    typeof navigator !== 'undefined' &&
+    /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent),
 
   /**
    * Check if device is desktop
    */
   isDesktop:
+    typeof navigator !== 'undefined' &&
     !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     ),
@@ -240,27 +272,33 @@ export const device = {
   /**
    * Check if device is iOS
    */
-  isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent),
+  isIOS:
+    typeof navigator !== 'undefined' &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent),
 
   /**
    * Check if device is Android
    */
-  isAndroid: /Android/.test(navigator.userAgent),
+  isAndroid:
+    typeof navigator !== 'undefined' && /Android/.test(navigator.userAgent),
 
   /**
    * Get device pixel ratio
    */
-  pixelRatio: window.devicePixelRatio || 1,
+  pixelRatio: typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
 
   /**
    * Check if device supports hover
    */
-  canHover: window.matchMedia('(hover: hover)').matches,
+  canHover:
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: hover)').matches,
 
   /**
    * Get screen size category
    */
   getScreenSize: () => {
+    if (typeof window === 'undefined') return 'lg'; // Default fallback
     const width = window.innerWidth;
     if (width < 576) return 'xs';
     if (width < 768) return 'sm';
@@ -320,7 +358,7 @@ export const polyfills = {
    * Polyfill for requestAnimationFrame
    */
   requestAnimationFrame: () => {
-    if (!window.requestAnimationFrame) {
+    if (typeof window !== 'undefined' && !window.requestAnimationFrame) {
       window.requestAnimationFrame = function (callback) {
         return window.setTimeout(callback, 1000 / 60);
       };
@@ -418,7 +456,10 @@ export const performance = {
    * Check if user prefers reduced motion
    */
   prefersReducedMotion: () => {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return (
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
   },
 };
 

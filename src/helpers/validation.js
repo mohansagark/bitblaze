@@ -219,11 +219,17 @@ export const validateCardMove = (move, gameState) => {
 export const sanitizeInput = input => {
   if (typeof input !== 'string') return input;
 
-  return input
-    .trim()
-    .replace(/[<>]/g, '') // Remove potential HTML tags
-    .replace(/['"]/g, '') // Remove quotes
-    .substring(0, 1000); // Limit length
+  return (
+    input
+      .trim()
+      // Remove script tags and their content entirely
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      // Remove any other HTML tags
+      .replace(/<[^>]*>/g, '')
+      .replace(/javascript:/gi, '') // Remove javascript: protocol
+      .replace(/['"]/g, '') // Remove quotes
+      .substring(0, 1000)
+  ); // Limit length
 };
 
 /**

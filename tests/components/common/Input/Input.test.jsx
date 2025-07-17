@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Input from './index';
+import Input from '../../../../src/components/common/Input';
 
 describe('Input Component', () => {
   test('renders input with label', () => {
@@ -43,5 +43,20 @@ describe('Input Component', () => {
 
     const input = screen.getByLabelText('Password Input');
     expect(input).toHaveAttribute('type', 'password');
+  });
+
+  test('is disabled when disabled prop is true', () => {
+    render(<Input label="Test Input" disabled={true} />);
+
+    const input = screen.getByLabelText('Test Input');
+    expect(input).toBeDisabled();
+  });
+
+  test('applies custom className', () => {
+    render(<Input label="Test Input" className="custom-input" />);
+
+    // Check if the TextField container has the custom class
+    const inputContainer = document.querySelector('.custom-input');
+    expect(inputContainer).toBeInTheDocument();
   });
 });

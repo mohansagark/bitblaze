@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import ErrorBoundary from './index';
+import { render, screen, fireEvent } from '@testing-library/react';
+import ErrorBoundary from '../../../../src/components/common/ErrorBoundary';
 
 // Test component that throws an error
 const ThrowError = ({ shouldThrow }) => {
@@ -91,5 +91,28 @@ describe('ErrorBoundary Component', () => {
     ).toBeInTheDocument();
 
     process.env.NODE_ENV = originalEnv;
+  });
+
+  test('refresh button reloads the page', () => {
+    // Mock window.location.reload
+    const mockReload = jest.fn();
+    Object.defineProperty(window, 'location', {
+      value: {
+        reload: mockReload,
+      },
+      writable: true,
+    });
+
+    render(
+      <ErrorBoundary>
+        <ThrowError shouldThrow={true} />
+      </ErrorBoundary>
+    );
+
+    const refreshButton = screen.getByText('Refresh Page');
+    expect(refreshButton).toBeInTheDocument();
+
+    fireEvent.click(refreshButton);
+    expect(mockReload).toHaveBeenCalled();
   });
 });
