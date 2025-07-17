@@ -1,20 +1,21 @@
-import "./Input.scss";
-import { TextField } from "@mui/material";
+import './Input.scss';
+import PropTypes from 'prop-types';
+import { TextField } from '@mui/material';
 
 const Input = ({
   label,
-  type = "text",
+  type = 'text',
   value,
   onChange,
-  placeholder = "",
+  placeholder = '',
   maxLength,
   error = false,
-  helperText = "",
+  helperText = '',
 }) => {
   return (
     <TextField
       InputProps={{
-        sx: { color: "inherit" },
+        sx: { color: 'inherit' },
       }}
       className="input-field focus:border-primary"
       variant="outlined"
@@ -29,6 +30,28 @@ const Input = ({
       helperText={helperText}
     />
   );
+};
+
+Input.propTypes = {
+  label: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  maxLength: PropTypes.number,
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
+};
+
+Input.defaultProps = {
+  label: '',
+  type: 'text',
+  value: '',
+  onChange: () => {},
+  placeholder: '',
+  maxLength: undefined,
+  error: false,
+  helperText: '',
 };
 
 export default Input;

@@ -1,17 +1,18 @@
-import { useEffect } from "react";
-import { useAudio } from "../../../helpers/hooks";
+import { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useAudio } from '../../../helpers/hooks';
 
 const Button = ({
-  id = "button",
+  id = 'button',
   icon,
-  size = "base",
+  size = 'base',
   text,
   borderRadius,
   onClick = () => null,
-  className = "",
+  className = '',
   sound = false,
   disabled = false,
-  variant = "primary", // "primary" or "secondary"
+  variant = 'primary', // "primary" or "secondary"
 }) => {
   const { playSound, registerAudio } = useAudio();
 
@@ -25,23 +26,23 @@ const Button = ({
     onClick();
   };
 
-  const isPrimary = variant === "primary";
+  const isPrimary = variant === 'primary';
 
   const baseStyles = {
     backgroundColor: disabled
-      ? "var(--color-neutral-400)"
+      ? 'var(--color-neutral-400)'
       : isPrimary
-      ? "var(--color-primary)"
-      : "transparent",
+      ? 'var(--color-primary)'
+      : 'transparent',
     color: disabled
-      ? "var(--color-neutral-100)"
+      ? 'var(--color-neutral-100)'
       : isPrimary
-      ? "var(--color-primary-text)"
-      : "var(--color-primary)",
-    border: isPrimary ? "none" : "1px solid var(--color-primary)",
-    borderRadius: borderRadius || "0.5rem",
-    cursor: disabled ? "not-allowed" : "pointer",
-    transition: "all 0.2s ease-in-out",
+      ? 'var(--color-primary-text)'
+      : 'var(--color-primary)',
+    border: isPrimary ? 'none' : '1px solid var(--color-primary)',
+    borderRadius: borderRadius || '0.5rem',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    transition: 'all 0.2s ease-in-out',
   };
 
   return (
@@ -52,12 +53,38 @@ const Button = ({
       disabled={disabled}
       style={baseStyles}
       className={`w-full p-3 text-${size} ${
-        disabled ? "opacity-60" : "hover:opacity-90 hover:drop-shadow-xl"
+        disabled ? 'opacity-60' : 'hover:opacity-90 hover:drop-shadow-xl'
       } ${className}`}
     >
       {icon} {text}
     </button>
   );
+};
+
+Button.propTypes = {
+  id: PropTypes.string,
+  icon: PropTypes.node,
+  size: PropTypes.oneOf(['xs', 'sm', 'base', 'lg', 'xl']),
+  text: PropTypes.string,
+  borderRadius: PropTypes.string,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  sound: PropTypes.bool,
+  disabled: PropTypes.bool,
+  variant: PropTypes.oneOf(['primary', 'secondary']),
+};
+
+Button.defaultProps = {
+  id: 'button',
+  icon: null,
+  size: 'base',
+  text: '',
+  borderRadius: null,
+  onClick: () => null,
+  className: '',
+  sound: false,
+  disabled: false,
+  variant: 'primary',
 };
 
 export default Button;

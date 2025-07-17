@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useContext, useRef } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useContext, useRef } from 'react';
 import {
   setMenubar,
   startConfetti,
   stopConfetti,
-} from "../redux/slices/generalSlice";
-import { sidebarWidth as sbWidth, headerHeight, footerHeight } from "./config";
-import { ThemeContext } from "../themes";
+} from '../redux/slices/generalSlice';
+import { sidebarWidth as sbWidth, headerHeight, footerHeight } from './config';
+import { ThemeContext } from '../themes';
 
 export const useTheme = () => useContext(ThemeContext);
 
@@ -28,7 +28,7 @@ export const useConfetti = () => {
 
 export const useMenu = () => {
   const dispatch = useDispatch();
-  const { menubar: menu, isMobile } = useSelector((state) => state.general);
+  const { menubar: menu, isMobile } = useSelector(state => state.general);
 
   const sidebarWidth = !isMobile && menu ? sbWidth : 0;
 
@@ -49,18 +49,72 @@ export const useMenu = () => {
 export const useAudio = () => {
   const audioRefs = useRef({});
 
-  const playSound = (id = "audio") => {
-    const audioRef = audioRefs.current[id];
-    if (audioRef) {
-      audioRef.play();
+  const playSound = (id = 'audio') => {
+    try {
+      const audioRef = audioRefs.current[id];
+      if (audioRef) {
+        // Reset audio to beginning if already playing
+        audioRef.currentTime = 0;
+        const playPromise = audioRef.play();
+
+        // Handle promise-based play() method
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.warn(`Audio play failed for ${id}:`, error);
+          });
+        }
+      } else {
+        console.warn(`Audio with id "${id}" not found. Did you register it?`);
+      }
+    } catch (error) {
+      console.error(`Error playing audio ${id}:`, error);
     }
   };
 
-  const registerAudio = (id = "audio", variant = "button") => {
-    const audioRef = document.createElement("audio");
-    audioRef.src = `audio/${variant}.mp3`;
-    audioRefs.current[id] = audioRef;
+  const registerAudio = (id = 'audio', variant = 'button') => {
+    try {
+      if (audioRefs.current[id]) {
+        console.warn(`Audio with id "${id}" already registered`);
+        return;
+      }
+
+      const audioRef = document.createElement('audio');
+      audioRef.src = `/audio/${variant}.mp3`;
+      audioRef.preload = 'auto';
+
+      // Handle audio loading errors
+      audioRef.addEventListener('error', e => {
+        console.error(`Failed to load audio file: /audio/${variant}.mp3`, e);
+      });
+
+      audioRefs.current[id] = audioRef;
+    } catch (error) {
+      console.error(`Error registering audio ${id}:`, error);
+    }
   };
 
-  return { playSound, registerAudio };
+  const stopSound = (id = 'audio') => {
+    try {
+      const audioRef = audioRefs.current[id];
+      if (audioRef) {
+        audioRef.pause();
+        audioRef.currentTime = 0;
+      }
+    } catch (error) {
+      console.error(`Error stopping audio ${id}:`, error);
+    }
+  };
+
+  const setVolume = (id = 'audio', volume = 1) => {
+    try {
+      const audioRef = audioRefs.current[id];
+      if (audioRef) {
+        audioRef.volume = Math.max(0, Math.min(1, volume));
+      }
+    } catch (error) {
+      console.error(`Error setting volume for audio ${id}:`, error);
+    }
+  };
+
+  return { playSound, registerAudio, stopSound, setVolume };
 };
