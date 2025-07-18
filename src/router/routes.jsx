@@ -3,6 +3,7 @@ import Cards from '../pages/Games/Cards';
 import ChessBoard from '../pages/Games/ChessBoard';
 import RockPaperScissors from '../pages/Games/RockPaperScissors';
 import SnakesAndLadders from '../pages/Games/SnakesAndLadders';
+import TwentyFortyEight from '../pages/Games/TwentyFortyEight';
 import Home from '../pages/Home';
 import { routePaths } from './routeConstants';
 
@@ -26,6 +27,10 @@ const routes = [
   {
     path: routePaths.cards,
     element: <Cards />,
+  },
+  {
+    path: routePaths.twentyFortyEight,
+    element: <TwentyFortyEight />,
   },
   {
     path: routePaths.whatsAppChat,

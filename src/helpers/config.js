@@ -3,6 +3,7 @@ import { TbWorld } from 'react-icons/tb';
 import { GiRollingDices } from 'react-icons/gi';
 import { FaChess } from 'react-icons/fa';
 import { GiPapers, GiPokerHand } from 'react-icons/gi';
+import { TbNumbers } from 'react-icons/tb';
 import { routePaths } from '../router/routeConstants';
 import { IoLogoWhatsapp } from 'react-icons/io';
 
@@ -84,6 +85,12 @@ export const menuList = [
     icon: <GiPokerHand />,
     title: 'Cards',
     path: routePaths.cards,
+    category: 'game',
+  },
+  {
+    icon: <TbNumbers />,
+    title: '2048',
+    path: routePaths.twentyFortyEight,
     category: 'game',
   },
   {
