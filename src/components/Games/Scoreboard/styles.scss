@@ -1,0 +1,228 @@
+.scoreboard-dialog {
+  .MuiDialog-paper {
+    background: var(--color-background);
+    color: var(--color-background-text);
+    max-width: 600px; // Reduce width for more height-focused layout
+    width: 80vw; // Reduce width on desktop
+    min-height: 70vh; // Ensure height is greater than width
+    max-height: 90vh; // Prevent modal from being too tall
+  }
+
+  .MuiDialogTitle-root {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-neutral-300);
+
+    .close-button {
+      color: var(--color-background-text) !important;
+      opacity: 0.8;
+
+      &:hover {
+        background-color: var(--color-neutral-200) !important;
+        opacity: 1;
+      }
+
+      .MuiSvgIcon-root {
+        color: inherit !important;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .scoreboard-content {
+    padding: 1.5rem;
+
+    // Empty state styling
+    .MuiBox-root {
+      .MuiTypography-root {
+        color: var(--color-background-text) !important;
+
+        &.MuiTypography-h6 {
+          opacity: 0.7;
+        }
+
+        &.MuiTypography-body2 {
+          opacity: 0.6;
+        }
+      }
+    }
+
+    .stat-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-neutral-200);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .MuiCardContent-root {
+        padding: 1rem;
+        text-align: center;
+
+        &:last-child {
+          padding-bottom: 1rem;
+        }
+      }
+    }
+
+    .scores-table {
+      margin-top: 1rem;
+      border: 1px solid var(--color-neutral-200);
+
+      .MuiTableHead-root {
+        background: var(--color-neutral-100);
+
+        .MuiTableCell-root {
+          font-weight: bold;
+          color: var(--color-background-text);
+        }
+      }
+
+      .score-row {
+        &.top-score {
+          background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+
+          &:nth-child(1) {
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+          }
+
+          &:nth-child(2) {
+            background: linear-gradient(
+              45deg,
+              rgba(192, 192, 192, 0.15),
+              rgba(192, 192, 192, 0.08)
+            );
+          }
+
+          &:nth-child(3) {
+            background: linear-gradient(45deg, rgba(205, 127, 50, 0.15), rgba(205, 127, 50, 0.08));
+          }
+        }
+
+        &:hover {
+          background: var(--color-neutral-100);
+        }
+
+        .rank-number {
+          font-weight: bold;
+          color: var(--color-background-text);
+          font-size: 1.1rem;
+        }
+      }
+
+      .MuiTableCell-root {
+        color: var(--color-background-text);
+        border-bottom: 1px solid var(--color-neutral-200);
+      }
+    }
+  }
+
+  .scoreboard-actions {
+    padding: 16px 24px;
+    gap: 12px;
+    border-top: 1px solid var(--color-neutral-200);
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: flex-end;
+
+    // Enhanced custom button styling within dialog
+    .custom-button {
+      min-width: 120px !important;
+
+      &.clear-btn {
+        background-color: var(--color-error) !important;
+        color: white !important;
+
+        &:hover:not(:disabled) {
+          background-color: #d32f2f !important;
+          box-shadow:
+            0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+            0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+            0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        .custom-button__start-icon svg {
+          color: white !important;
+        }
+      }
+
+      &.close-btn {
+        background-color: var(--color-neutral-500) !important;
+        color: white !important;
+
+        &:hover:not(:disabled) {
+          background-color: var(--color-neutral-600) !important;
+          box-shadow:
+            0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+            0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+            0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .scoreboard-dialog {
+    .MuiDialog-paper {
+      margin: 1rem; // Increase margin for more space on sides
+      max-height: calc(100vh - 2rem);
+      width: calc(100vw - 2rem);
+      max-width: none;
+    }
+
+    .scoreboard-content {
+      padding: 1rem;
+
+      .scores-table {
+        .MuiTableCell-root {
+          padding: 0.5rem;
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .scoreboard-actions {
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .custom-button {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .scoreboard-dialog {
+    .MuiDialog-paper {
+      margin: 1rem; // Increase from 0.25rem for better spacing
+      max-height: calc(100vh - 2rem);
+      width: calc(100vw - 2rem); // Increase from calc(100vw - 0.5rem)
+    }
+
+    .MuiDialogTitle-root {
+      .MuiTypography-h4 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .scoreboard-content {
+      padding: 0.75rem;
+
+      .scores-table {
+        .MuiTableCell-root {
+          padding: 0.25rem;
+          font-size: 0.75rem;
+
+          &:first-child,
+          &:last-child {
+            display: none; // Hide rank and date on very small screens
+          }
+        }
+      }
+    }
+  }
+}

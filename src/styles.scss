@@ -82,13 +82,26 @@ body {
 }
 
 /* Override Material-UI theme colors to use our CSS variables */
-.MuiTypography-root[color="text.primary"] {
+.MuiTypography-root[color='text.primary'] {
   color: var(--color-background-text) !important;
 }
 
-.MuiTypography-root[color="text.secondary"] {
+.MuiTypography-root[color='text.secondary'] {
   color: var(--color-background-text) !important;
   opacity: 0.7;
+}
+
+/* IconButton color inheritance */
+.MuiIconButton-root {
+  color: var(--color-background-text);
+
+  &:hover {
+    background-color: var(--color-neutral-200);
+  }
+
+  .MuiSvgIcon-root {
+    color: inherit;
+  }
 }
 textarea,
 input,

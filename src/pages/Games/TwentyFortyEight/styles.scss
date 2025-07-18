@@ -229,7 +229,15 @@
   }
 
   .game-controls {
-    .new-game-btn {
+    .control-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .new-game-btn,
+    .scoreboard-btn {
       background: var(--color-primary);
       color: var(--color-primary-text);
       padding: 0.75rem 1.5rem;
@@ -239,9 +247,19 @@
       cursor: pointer;
       font-size: 1rem;
       transition: background-color 0.2s ease;
+      flex: 1;
+      min-width: 120px;
 
       &:hover {
         background: var(--color-accent-1);
+      }
+    }
+
+    .scoreboard-btn {
+      background: var(--color-secondary);
+
+      &:hover {
+        background: var(--color-accent-2);
       }
     }
   }
@@ -351,6 +369,19 @@
 
     .mobile-controls {
       display: block;
+    }
+
+    .game-controls {
+      .control-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .new-game-btn,
+      .scoreboard-btn {
+        min-width: auto;
+        padding: 0.6rem 1.2rem;
+      }
     }
   }
 

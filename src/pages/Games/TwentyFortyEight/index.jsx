@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Typography, Box } from '@mui/material';
 import Button from '../../../components/common/Button';
+import Scoreboard from '../../../components/Games/Scoreboard';
 import { useAudio, useConfetti } from '../../../helpers/hooks';
+import { saveScore, getBestScore } from '../../../helpers/scoreboard';
 import './styles.scss';
 
 const GRID_SIZE = 4;
@@ -232,15 +234,13 @@ const hasWon = grid => {
 const TwentyFortyEight = () => {
   const [grid, setGrid] = useState(() => initializeGrid());
   const [score, setScore] = useState(0);
-  const [bestScore, setBestScore] = useState(() => {
-    const saved = localStorage.getItem('2048-best-score');
-    return saved ? parseInt(saved, 10) : 0;
-  });
+  const [bestScore, setBestScore] = useState(() => getBestScore());
   const [gameStatus, setGameStatus] = useState('playing'); // 'playing', 'won', 'lost'
   const [hasWonOnce, setHasWonOnce] = useState(false);
   const [moves, setMoves] = useState(0);
   const [timer, setTimer] = useState(0);
   const [startTime, setStartTime] = useState(() => Date.now());
+  const [showScoreboard, setShowScoreboard] = useState(false);
 
   const { showConfetti } = useConfetti();
   const { playSound, registerAudio } = useAudio();
@@ -271,7 +271,6 @@ const TwentyFortyEight = () => {
   useEffect(() => {
     if (score > bestScore) {
       setBestScore(score);
-      localStorage.setItem('2048-best-score', score.toString());
     }
   }, [score, bestScore]);
 
@@ -281,11 +280,28 @@ const TwentyFortyEight = () => {
       setHasWonOnce(true);
       showConfetti();
       playSound(audioIds.win);
+      // Save winning score
+      saveScore(score, moves, timer, true);
+      setBestScore(getBestScore()); // Update best score from scoreboard
     } else if (!canMove(grid) && gameStatus === 'playing') {
       setGameStatus('lost');
       playSound(audioIds.gameOver);
+      // Save losing score
+      saveScore(score, moves, timer, false);
+      setBestScore(getBestScore()); // Update best score from scoreboard
     }
-  }, [grid, gameStatus, hasWonOnce, showConfetti, playSound, audioIds.win, audioIds.gameOver]);
+  }, [
+    grid,
+    gameStatus,
+    hasWonOnce,
+    showConfetti,
+    playSound,
+    audioIds.win,
+    audioIds.gameOver,
+    score,
+    moves,
+    timer,
+  ]);
 
   const handleMove = useCallback(
     direction => {
@@ -348,6 +364,7 @@ const TwentyFortyEight = () => {
     setMoves(0);
     setTimer(0);
     setStartTime(Date.now());
+    setBestScore(getBestScore()); // Refresh best score
   };
 
   const continueGame = () => {
@@ -470,7 +487,14 @@ const TwentyFortyEight = () => {
       </Box>
 
       <Box className='game-controls' mt={3}>
-        <Button text='New Game' onClick={resetGame} className='new-game-btn' />
+        <Box className='control-buttons'>
+          <Button text='New Game' onClick={resetGame} className='new-game-btn' />
+          <Button
+            text='Scoreboard'
+            onClick={() => setShowScoreboard(true)}
+            className='scoreboard-btn'
+          />
+        </Box>
       </Box>
 
       <Box className='mobile-controls' mt={2}>
@@ -483,6 +507,8 @@ const TwentyFortyEight = () => {
           <Button text='→' onClick={() => handleMove('right')} className='control-btn' />
         </Box>
       </Box>
+
+      <Scoreboard open={showScoreboard} onClose={() => setShowScoreboard(false)} />
     </Container>
   );
 };

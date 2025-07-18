@@ -392,6 +392,22 @@ describe('TwentyFortyEight Game Component', () => {
     // Timer should still be reset
     expect(screen.getByText('0:00')).toBeInTheDocument();
   });
+
+  test('renders scoreboard button', () => {
+    render(<TwentyFortyEight />);
+
+    expect(screen.getByText('Scoreboard')).toBeInTheDocument();
+  });
+
+  test('opens scoreboard when button is clicked', () => {
+    render(<TwentyFortyEight />);
+
+    const scoreboardButton = screen.getByText('Scoreboard');
+    fireEvent.click(scoreboardButton);
+
+    // Check if scoreboard dialog is opened
+    expect(screen.getByText('🏆 2048 Scoreboard')).toBeInTheDocument();
+  });
 });
 
 // Game Logic Unit Tests

@@ -1,0 +1,221 @@
+/* Custom Button component styles - MUI-inspired */
+.custom-button {
+  /* Base button styles */
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  position: relative !important;
+  outline: none !important;
+  border: none !important;
+  user-select: none !important;
+  vertical-align: middle !important;
+  text-decoration: none !important;
+  color: inherit !important;
+
+  /* Ripple effect simulation */
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background-color: currentColor;
+    opacity: 0;
+    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  &:hover:not(:disabled):before {
+    opacity: 0.04;
+  }
+
+  &:focus:not(:disabled):before {
+    opacity: 0.12;
+  }
+
+  /* Button content container */
+  .custom-button__content {
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    width: 100%;
+  }
+
+  /* Icon styles */
+  .custom-button__start-icon {
+    display: inherit;
+    margin-left: -4px;
+    margin-right: 8px;
+
+    &:last-child {
+      margin-right: -4px;
+    }
+
+    svg {
+      font-size: 1.125rem;
+      color: inherit;
+    }
+  }
+
+  .custom-button__end-icon {
+    display: inherit;
+    margin-left: 8px;
+    margin-right: -4px;
+
+    &:first-child {
+      margin-left: -4px;
+    }
+
+    svg {
+      font-size: 1.125rem;
+      color: inherit;
+    }
+  }
+
+  .custom-button__text {
+    color: inherit;
+  }
+
+  /* Size variants */
+  &.custom-button--size-small {
+    .custom-button__start-icon {
+      margin-left: -2px;
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: -2px;
+      }
+
+      svg {
+        font-size: 1rem;
+      }
+    }
+
+    .custom-button__end-icon {
+      margin-left: 5px;
+      margin-right: -2px;
+
+      &:first-child {
+        margin-left: -2px;
+      }
+
+      svg {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &.custom-button--size-large {
+    .custom-button__start-icon {
+      margin-left: -6px;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: -6px;
+      }
+
+      svg {
+        font-size: 1.25rem;
+      }
+    }
+
+    .custom-button__end-icon {
+      margin-left: 10px;
+      margin-right: -6px;
+
+      &:first-child {
+        margin-left: -6px;
+      }
+
+      svg {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  /* Variant styles */
+  &.custom-button--primary {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(25, 118, 210, 0.8) !important;
+      box-shadow:
+        0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+
+  &.custom-button--secondary {
+    background-color: transparent !important;
+    color: var(--color-primary) !important;
+    border: 1px solid rgba(25, 118, 210, 0.5) !important;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(25, 118, 210, 0.04) !important;
+      border-color: var(--color-primary) !important;
+    }
+  }
+
+  &.custom-button--error {
+    background-color: var(--color-error) !important;
+    color: white !important;
+
+    &:hover:not(:disabled) {
+      background-color: #d32f2f !important;
+      box-shadow:
+        0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+
+  &.custom-button--neutral {
+    background-color: var(--color-neutral-500) !important;
+    color: white !important;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-neutral-600) !important;
+      box-shadow:
+        0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+
+  /* Disabled state */
+  &.custom-button--disabled {
+    opacity: 0.26 !important;
+    cursor: default !important;
+    pointer-events: none !important;
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+    box-shadow: none !important;
+  }
+
+  /* Full width variant */
+  &.custom-button--full-width {
+    width: 100% !important;
+  }
+}
+
+/* Specific overrides for Dialog context */
+.MuiDialog-root .custom-button {
+  color: inherit !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+}
+
+.MuiDialogActions-root .custom-button {
+  color: inherit !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  margin-left: 8px !important;
+
+  &:first-child {
+    margin-left: 0 !important;
+  }
+}
