@@ -6,10 +6,6 @@ function Input({ onInput = () => null, label = '', maxLength = 100000000, type =
   const [inputFocus, setInputFocus] = useState(false);
 
   const handleChange = event => {
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log(event.target.value, 'value');
-    }
     if (type === 'number' && event.target.value.length <= maxLength) {
       setInputValue(event.target.value);
       onInput(event.target.value);

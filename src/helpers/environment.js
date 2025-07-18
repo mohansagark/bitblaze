@@ -91,17 +91,6 @@ export const validateEnvironment = () => {
  */
 export const logEnvironmentConfig = () => {
   if (isDevelopment() && isDebugEnabled()) {
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log('Environment Configuration:', {
-        environment: getEnvVar('REACT_APP_ENV'),
-        debug: isDebugEnabled(),
-        features: {
-          confetti: isFeatureEnabled('confetti'),
-          sound: isFeatureEnabled('sound'),
-          analytics: isFeatureEnabled('analytics'),
-        },
-      });
-    }
+    // Environment configuration logging disabled
   }
 };

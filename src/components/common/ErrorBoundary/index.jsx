@@ -13,12 +13,6 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // Log error to console and external service in development only
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.error('Error caught by ErrorBoundary:', error, errorInfo);
-    }
-
     this.setState({
       error: error,
       errorInfo: errorInfo,

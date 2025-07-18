@@ -1,36 +1,3 @@
-/**
- * Tests for Container   test('r  test('re  test('applies center styles when center prop is true', () => {
-    render(
-      <Container center>
-        <p>Centered content</p>
-      </Container>,
-    );
-
-    const containerDiv = screen.getByText('Centered content').parentElement;
-    expect(containerDiv).toHaveClass('flex', 'items-center', 'justify-center');
-    expect(screen.getByText('Centered content')).toBeInTheDocument();
-  });center prop true', () => {
-    const { container } = render(
-      <Container center={true}>
-        <p>Centered content</p>
-      </Container>,
-    );
-
-    const containerDiv = screen.getByRole('generic');
-    expect(containerDiv).toHaveClass('flex', 'items-center', 'justify-center');
-    expect(screen.getByText('Centered content')).toBeInTheDocument();
-  }); center prop true', () => {
-    render(
-      <Container center={true}>
-        <p>Centered content</p>
-      </Container>,
-    );
-
-    const containerDiv = screen.getByRole('generic');
-    expect(containerDiv).toHaveClass('flex', 'items-center', 'justify-center');
-    expect(screen.getByText('Centered content')).toBeInTheDocument();
-  });*/
-
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Container from '../../../src/components/common/Container';

@@ -206,8 +206,7 @@ export const secureStorage = {
       return JSON.parse(value);
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.error('Error reading from localStorage:', error);
+        // Read failed silently
       }
       return null;
     }

@@ -2,10 +2,6 @@ import { useRouteError } from 'react-router-dom';
 
 const ErrorPage = () => {
   const error = useRouteError();
-  if (process.env.NODE_ENV === 'development') {
-    // eslint-disable-next-line no-console
-    console.error(error);
-  }
 
   return (
     <div id='error-page'>

@@ -40,18 +40,8 @@ const HoroscopeMatch = () => {
         }
         return response.json();
       })
-      .then(data => {
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.log(data);
-        }
-      })
-      .catch(error => {
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.error('There was a problem with your fetch operation:', error);
-        }
-      });
+      .then()
+      .catch();
   }, []);
   return <div>HoroscopeMatch</div>;
 };

@@ -35,10 +35,7 @@ class PerformanceMonitor {
       this.recordMetric(componentName, 'renderTime', renderTime);
 
       if (renderTime > PERFORMANCE.SLOW_RENDER_THRESHOLD && isDevelopment()) {
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.warn(`Slow render detected for ${componentName}: ${renderTime.toFixed(2)}ms`);
-        }
+        // Slow render detection disabled
       }
     };
   }
@@ -102,13 +99,9 @@ class PerformanceMonitor {
       percentage: (memory.usedJSHeapSize / memory.jsHeapSizeLimit) * 100,
     };
 
-    if (usage.used > PERFORMANCE.MEMORY_WARNING_THRESHOLD && isDevelopment()) {
-      if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.warn(`High memory usage detected: ${(usage.used / 1024 / 1024).toFixed(2)}MB`);
-      }
+    if (usage.used > PERFORMANCE.MEMORY_THRESHOLD && isDevelopment()) {
+      // High memory usage detected, disabled logging
     }
-
     return usage;
   }
 
@@ -232,17 +225,6 @@ export const measureExecutionTime = (fn, name) => {
 export const initializePerformanceMonitoring = () => {
   if (performanceMonitor.enabled) {
     performanceMonitor.measureWebVitals();
-
-    // Log performance report every 30 seconds in development
-    if (isDevelopment()) {
-      setInterval(() => {
-        const report = performanceMonitor.generateReport();
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.log('Performance Report:', report);
-        }
-      }, 30000);
-    }
   }
 };
 

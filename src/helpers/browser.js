@@ -450,8 +450,7 @@ export const safeFeatures = {
           return true;
         } catch (e) {
           if (process.env.NODE_ENV === 'development') {
-            // eslint-disable-next-line no-console
-            console.warn('localStorage.setItem failed:', e);
+            // localStorage.setItem failed silently
           }
         }
       }
@@ -464,8 +463,7 @@ export const safeFeatures = {
           return localStorage.getItem(key);
         } catch (e) {
           if (process.env.NODE_ENV === 'development') {
-            // eslint-disable-next-line no-console
-            console.warn('localStorage.getItem failed:', e);
+            // localStorage.getItem failed silently
           }
         }
       }
@@ -479,8 +477,7 @@ export const safeFeatures = {
           return true;
         } catch (e) {
           if (process.env.NODE_ENV === 'development') {
-            // eslint-disable-next-line no-console
-            console.warn('localStorage.removeItem failed:', e);
+            // localStorage.removeItem failed silently
           }
         }
       }
@@ -498,8 +495,7 @@ export const safeFeatures = {
         return true;
       } catch (e) {
         if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.warn('Clipboard API failed:', e);
+          // Clipboard API failed silently
         }
       }
     }
@@ -519,8 +515,7 @@ export const safeFeatures = {
       return result;
     } catch (e) {
       if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.warn('Copy fallback failed:', e);
+        // Copy fallback failed silently
       }
       return false;
     }
@@ -532,8 +527,7 @@ export const safeFeatures = {
   showNotification: (title, options = {}) => {
     if (!features.notifications) {
       if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.warn('Notifications not supported');
+        // Notifications not supported
       }
       return null;
     }
